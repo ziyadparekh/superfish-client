@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		796C3B2CCC6E8649D2BD9DA2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA14FDB5A0712DD3E3B8CB8 /* libPods.a */; };
+		871FC3D11B1F7E01003F9919 /* ZPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D01B1F7E01003F9919 /* ZPTableViewController.m */; };
+		871FC3D41B1F7EB3003F9919 /* ZPGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D31B1F7EB3003F9919 /* ZPGroup.m */; };
+		871FC3D71B1F87A1003F9919 /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D61B1F87A1003F9919 /* Messages.m */; };
+		871FC3DA1B1F9267003F9919 /* ZPGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D91B1F9267003F9919 /* ZPGroupTableViewCell.m */; };
 		8722651A1B1CD24300341003 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 872265191B1CD24300341003 /* main.m */; };
 		8722651D1B1CD24300341003 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8722651C1B1CD24300341003 /* AppDelegate.m */; };
 		872265201B1CD24300341003 /* superfish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8722651E1B1CD24300341003 /* superfish.xcdatamodeld */; };
-		872265231B1CD24300341003 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 872265221B1CD24300341003 /* ViewController.m */; };
 		872265261B1CD24300341003 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 872265241B1CD24300341003 /* Main.storyboard */; };
 		872265281B1CD24300341003 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 872265271B1CD24300341003 /* Images.xcassets */; };
 		8722652B1B1CD24300341003 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 872265291B1CD24300341003 /* LaunchScreen.xib */; };
@@ -28,14 +32,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1FA14FDB5A0712DD3E3B8CB8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		294ED66FD3E4E9283780773E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		7F3DB5247631E3E37EA86F11 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		871FC3CF1B1F7E01003F9919 /* ZPTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPTableViewController.h; sourceTree = "<group>"; };
+		871FC3D01B1F7E01003F9919 /* ZPTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPTableViewController.m; sourceTree = "<group>"; };
+		871FC3D21B1F7EB3003F9919 /* ZPGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPGroup.h; sourceTree = "<group>"; };
+		871FC3D31B1F7EB3003F9919 /* ZPGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPGroup.m; sourceTree = "<group>"; };
+		871FC3D51B1F87A1003F9919 /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
+		871FC3D61B1F87A1003F9919 /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
+		871FC3D81B1F9267003F9919 /* ZPGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPGroupTableViewCell.h; sourceTree = "<group>"; };
+		871FC3D91B1F9267003F9919 /* ZPGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPGroupTableViewCell.m; sourceTree = "<group>"; };
 		872265141B1CD24300341003 /* superfish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = superfish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		872265181B1CD24300341003 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		872265191B1CD24300341003 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8722651B1B1CD24300341003 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8722651C1B1CD24300341003 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8722651F1B1CD24300341003 /* superfish.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = superfish.xcdatamodel; sourceTree = "<group>"; };
-		872265211B1CD24300341003 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		872265221B1CD24300341003 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		872265251B1CD24300341003 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		872265271B1CD24300341003 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8722652A1B1CD24300341003 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -49,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				796C3B2CCC6E8649D2BD9DA2 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,12 +76,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		61C5B5AE5BF9579EEF43285A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7F3DB5247631E3E37EA86F11 /* Pods.debug.xcconfig */,
+				294ED66FD3E4E9283780773E /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		66D97280076E8B9FD0798496 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1FA14FDB5A0712DD3E3B8CB8 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8722650B1B1CD24200341003 = {
 			isa = PBXGroup;
 			children = (
 				872265161B1CD24300341003 /* superfish */,
 				872265331B1CD24300341003 /* superfishTests */,
 				872265151B1CD24300341003 /* Products */,
+				61C5B5AE5BF9579EEF43285A /* Pods */,
+				66D97280076E8B9FD0798496 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,11 +116,17 @@
 		872265161B1CD24300341003 /* superfish */ = {
 			isa = PBXGroup;
 			children = (
+				871FC3D21B1F7EB3003F9919 /* ZPGroup.h */,
+				871FC3D31B1F7EB3003F9919 /* ZPGroup.m */,
+				871FC3CF1B1F7E01003F9919 /* ZPTableViewController.h */,
+				871FC3D01B1F7E01003F9919 /* ZPTableViewController.m */,
 				8722651B1B1CD24300341003 /* AppDelegate.h */,
 				8722651C1B1CD24300341003 /* AppDelegate.m */,
-				872265211B1CD24300341003 /* ViewController.h */,
-				872265221B1CD24300341003 /* ViewController.m */,
 				872265241B1CD24300341003 /* Main.storyboard */,
+				871FC3D81B1F9267003F9919 /* ZPGroupTableViewCell.h */,
+				871FC3D91B1F9267003F9919 /* ZPGroupTableViewCell.m */,
+				871FC3D51B1F87A1003F9919 /* Messages.h */,
+				871FC3D61B1F87A1003F9919 /* Messages.m */,
 				872265271B1CD24300341003 /* Images.xcassets */,
 				872265291B1CD24300341003 /* LaunchScreen.xib */,
 				8722651E1B1CD24300341003 /* superfish.xcdatamodeld */,
@@ -129,9 +168,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8722653A1B1CD24300341003 /* Build configuration list for PBXNativeTarget "superfish" */;
 			buildPhases = (
+				E5D2F5B768BB633B92B7C70F /* Check Pods Manifest.lock */,
 				872265101B1CD24300341003 /* Sources */,
 				872265111B1CD24300341003 /* Frameworks */,
 				872265121B1CD24300341003 /* Resources */,
+				89166F48E4F95E128FF61053 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -217,15 +258,51 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		89166F48E4F95E128FF61053 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5D2F5B768BB633B92B7C70F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		872265101B1CD24300341003 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8722651D1B1CD24300341003 /* AppDelegate.m in Sources */,
+				871FC3D71B1F87A1003F9919 /* Messages.m in Sources */,
 				8722651A1B1CD24300341003 /* main.m in Sources */,
-				872265231B1CD24300341003 /* ViewController.m in Sources */,
+				871FC3D41B1F7EB3003F9919 /* ZPGroup.m in Sources */,
 				872265201B1CD24300341003 /* superfish.xcdatamodeld in Sources */,
+				871FC3D11B1F7E01003F9919 /* ZPTableViewController.m in Sources */,
+				871FC3DA1B1F9267003F9919 /* ZPGroupTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +422,7 @@
 		};
 		8722653B1B1CD24300341003 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F3DB5247631E3E37EA86F11 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = superfish/Info.plist;
@@ -355,6 +433,7 @@
 		};
 		8722653C1B1CD24300341003 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 294ED66FD3E4E9283780773E /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = superfish/Info.plist;
@@ -416,6 +495,7 @@
 				8722653C1B1CD24300341003 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8722653D1B1CD24300341003 /* Build configuration list for PBXNativeTarget "superfishTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +504,7 @@
 				8722653F1B1CD24300341003 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
