@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-SlackTextViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SocketRocket.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,47 +57,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>23E0B37459AF123E88540969</key>
+		<key>03170827F46B6D0CC9E3841B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>664FD2CCDC6BEDFFF7C49216</key>
+		<key>11C3C9F3F93B8FDB1DDA8D85</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>848E2B93359DF12602F5003B</key>
+		<key>4A44436A42EAC2E83B236E0B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B97D717A87A734DFD389FEA2</key>
+		<key>5306EF097BF4F000B937D293</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CA27D5EA0F4AD22FD8FEECAD</key>
+		<key>5999ECE8C613D6E4B92A97B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CAABDE408EE1F577FB3CCA3A</key>
+		<key>83A18DAC1F953DA1047D011D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E5B8E07BF92D97CF07CB5A23</key>
+		<key>865E81EA2FA51B014B5835F9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EE89A521F63B98D9628DD25B</key>
+		<key>92F2A4A55B97B7E6854A4155</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FA3D657085F2C3B752609152</key>
+		<key>9D60C173E38BBF5C74C02C10</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BDE3EF920EA9A1C4DE47E8BF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -10,6 +10,7 @@
 #import "ZPGroupTableViewCell.h"
 #import <RestKit/RestKit.h>
 #import <NSDate-Time-Ago/NSDate+NVTimeAgo.h>
+#import "MessagesViewController.h"
 #import "ZPGroup.h"
 #import "Messages.h"
 
@@ -51,7 +52,7 @@
     
     // setup object mappings
     RKObjectMapping *groupMapping = [RKObjectMapping mappingForClass:[ZPGroup class]];
-    [groupMapping addAttributeMappingsFromArray:@[@"name", @"activity"]];
+    [groupMapping addAttributeMappingsFromArray:@[@"name", @"activity", @"groupId"]];
     
     RKObjectMapping *messagesMapping = [RKObjectMapping mappingForClass:[Messages class]];
     [messagesMapping addAttributeMappingsFromArray:@[@"content", @"time"]];
@@ -160,14 +161,20 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"GroupToMessagesSegue"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        MessagesViewController *destinationViewController = [segue destinationViewController];
+        //destinationViewController.group = [self.groups objectAtIndex:indexPath.row];
+        
+    }
 }
-*/
+
 
 @end

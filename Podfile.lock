@@ -23,6 +23,9 @@ PODS:
   - RestKit/Support (0.24.1):
     - TransitionKit (~> 2.1.0)
   - RKValueTransformers (1.1.2)
+  - SlackTextViewController (1.5):
+    - SlackTextViewController/Additions (= 1.5)
+  - SlackTextViewController/Additions (1.5)
   - SocketRocket (0.2.0)
   - SOCKit (1.1)
   - TransitionKit (2.1.1)
@@ -30,6 +33,7 @@ PODS:
 DEPENDENCIES:
   - NSDate-Time-Ago
   - RestKit (~> 0.24.1)
+  - SlackTextViewController
   - SocketRocket
 
 SPEC CHECKSUMS:
@@ -38,6 +42,7 @@ SPEC CHECKSUMS:
   NSDate-Time-Ago: e9de167d0659ebe465c273e833e7b582f061fc41
   RestKit: 1987b5efef289c6b27bd980714d6ca48d3871b78
   RKValueTransformers: 66ac5e4f077fdbe3496e792d89eeff4c3eb67701
+  SlackTextViewController: 4a1797ac2f3616dbd37435fc62da655e61399cdd
   SocketRocket: 54a4ac2f354c4e8c51ef5dcd4a13bc556d4f2b7c
   SOCKit: c7376ac262bea9115b8f749358f762522a47d392
   TransitionKit: 3a14b6acc7cf2d1dd3e454e24dbad1cfab9a1ef1

@@ -19,6 +19,9 @@
 		872265281B1CD24300341003 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 872265271B1CD24300341003 /* Images.xcassets */; };
 		8722652B1B1CD24300341003 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 872265291B1CD24300341003 /* LaunchScreen.xib */; };
 		872265371B1CD24300341003 /* superfishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 872265361B1CD24300341003 /* superfishTests.m */; };
+		879C83AC1B20E5E400818ECF /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83AB1B20E5E400818ECF /* MessagesViewController.m */; };
+		879C83AF1B20E65D00818ECF /* MessagesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83AE1B20E65D00818ECF /* MessagesTableViewCell.m */; };
+		879C83B21B20E68000818ECF /* MessagesTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83B11B20E68000818ECF /* MessagesTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,12 @@
 		872265301B1CD24300341003 /* superfishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = superfishTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		872265351B1CD24300341003 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		872265361B1CD24300341003 /* superfishTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = superfishTests.m; sourceTree = "<group>"; };
+		879C83AA1B20E5E400818ECF /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
+		879C83AB1B20E5E400818ECF /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
+		879C83AD1B20E65D00818ECF /* MessagesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesTableViewCell.h; sourceTree = "<group>"; };
+		879C83AE1B20E65D00818ECF /* MessagesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesTableViewCell.m; sourceTree = "<group>"; };
+		879C83B01B20E68000818ECF /* MessagesTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesTextView.h; sourceTree = "<group>"; };
+		879C83B11B20E68000818ECF /* MessagesTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,8 +125,8 @@
 		872265161B1CD24300341003 /* superfish */ = {
 			isa = PBXGroup;
 			children = (
-				871FC3D21B1F7EB3003F9919 /* ZPGroup.h */,
-				871FC3D31B1F7EB3003F9919 /* ZPGroup.m */,
+				879C83A91B20E5BB00818ECF /* Messages */,
+				879C839F1B1FDD9400818ECF /* Groups */,
 				871FC3CF1B1F7E01003F9919 /* ZPTableViewController.h */,
 				871FC3D01B1F7E01003F9919 /* ZPTableViewController.m */,
 				8722651B1B1CD24300341003 /* AppDelegate.h */,
@@ -125,8 +134,6 @@
 				872265241B1CD24300341003 /* Main.storyboard */,
 				871FC3D81B1F9267003F9919 /* ZPGroupTableViewCell.h */,
 				871FC3D91B1F9267003F9919 /* ZPGroupTableViewCell.m */,
-				871FC3D51B1F87A1003F9919 /* Messages.h */,
-				871FC3D61B1F87A1003F9919 /* Messages.m */,
 				872265271B1CD24300341003 /* Images.xcassets */,
 				872265291B1CD24300341003 /* LaunchScreen.xib */,
 				8722651E1B1CD24300341003 /* superfish.xcdatamodeld */,
@@ -159,6 +166,30 @@
 				872265351B1CD24300341003 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		879C839F1B1FDD9400818ECF /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				871FC3D21B1F7EB3003F9919 /* ZPGroup.h */,
+				871FC3D31B1F7EB3003F9919 /* ZPGroup.m */,
+			);
+			name = Groups;
+			sourceTree = "<group>";
+		};
+		879C83A91B20E5BB00818ECF /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				871FC3D51B1F87A1003F9919 /* Messages.h */,
+				871FC3D61B1F87A1003F9919 /* Messages.m */,
+				879C83AA1B20E5E400818ECF /* MessagesViewController.h */,
+				879C83AB1B20E5E400818ECF /* MessagesViewController.m */,
+				879C83AD1B20E65D00818ECF /* MessagesTableViewCell.h */,
+				879C83AE1B20E65D00818ECF /* MessagesTableViewCell.m */,
+				879C83B01B20E68000818ECF /* MessagesTextView.h */,
+				879C83B11B20E68000818ECF /* MessagesTextView.m */,
+			);
+			name = Messages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,11 +329,14 @@
 			files = (
 				8722651D1B1CD24300341003 /* AppDelegate.m in Sources */,
 				871FC3D71B1F87A1003F9919 /* Messages.m in Sources */,
+				879C83AC1B20E5E400818ECF /* MessagesViewController.m in Sources */,
 				8722651A1B1CD24300341003 /* main.m in Sources */,
 				871FC3D41B1F7EB3003F9919 /* ZPGroup.m in Sources */,
 				872265201B1CD24300341003 /* superfish.xcdatamodeld in Sources */,
+				879C83AF1B20E65D00818ECF /* MessagesTableViewCell.m in Sources */,
 				871FC3D11B1F7E01003F9919 /* ZPTableViewController.m in Sources */,
 				871FC3DA1B1F9267003F9919 /* ZPGroupTableViewCell.m in Sources */,
+				879C83B21B20E68000818ECF /* MessagesTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

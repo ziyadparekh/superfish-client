@@ -13,5 +13,6 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *activity;
 @property (strong, nonatomic) NSArray *messages;
+@property (strong, nonatomic) NSString *groupId;
 
 @end

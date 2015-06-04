@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZPTableViewController : UITableViewController
+@interface ZPTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end
