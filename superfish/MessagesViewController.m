@@ -9,26 +9,33 @@
 #import "MessagesViewController.h"
 #import "MessagesTableViewCell.h"
 #import "MessagesTextView.h"
+#import "MessagePost.h"
 #import "Messages.h"
 
+
+#import "SRWebSocket.h"
 #import <RestKit/RestKit.h>
 
 static NSString *MessengerCellIdentifier = @"MessengerCell";
 static NSString *AutoCompletionCellIdentifier = @"AutoCompletionCell";
 // TODO:: REMOVE THESE
 static NSString *TemporaryGroupId = @"5563b70a3c5d631c51000001";
-static NSString *TeporaryUserToken = @"555e8e3b3c5d6387f9000002_8538477eea20bc193e81c4785e369aa2186ad34ea8b896a67a608c1937a3cd63";
+static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d840e76aa1d0480f103c634becf814baf6aa2b5d5f05de12a8";
 
-@interface MessagesViewController ()
+@interface MessagesViewController () <SRWebSocketDelegate>
 
 @property (strong, nonatomic) NSMutableArray *messages;
 
 @property (strong, nonatomic) NSArray *users;
 @property (strong, nonatomic) NSArray *emojis;
 
+- (IBAction)reconnect:(id)sender;
+
 @end
 
-@implementation MessagesViewController
+@implementation MessagesViewController {
+    SRWebSocket *_webSocket;
+}
 
 
 #pragma mark - Initializer
@@ -69,7 +76,7 @@ static NSString *TeporaryUserToken = @"555e8e3b3c5d6387f9000002_8538477eea20bc19
     self.shakeToClearEnabled = YES;
     self.keyboardPanningEnabled = YES;
     self.shouldScrollToBottomAfterKeyboardShows = YES;
-    self.inverted = YES;
+    self.inverted = NO;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[MessagesTableViewCell class] forCellReuseIdentifier:MessengerCellIdentifier];
@@ -90,6 +97,7 @@ static NSString *TeporaryUserToken = @"555e8e3b3c5d6387f9000002_8538477eea20bc19
     
     [self configureRestkit];
     [self loadMessages];
+    
 }
 
 #pragma mark - RestKit Configuration
@@ -118,7 +126,7 @@ static NSString *TeporaryUserToken = @"555e8e3b3c5d6387f9000002_8538477eea20bc19
                                   @"offset": @0
                                   };
     [[RKObjectManager sharedManager] getObjectsAtPath:[NSString stringWithFormat:@"/group/%@/messages", TemporaryGroupId] parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        self.messages = [mappingResult.array mutableCopy];
+        self.messages = [[[mappingResult.array reverseObjectEnumerator] allObjects] mutableCopy];
         [self.tableView reloadData];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"There was an error : %@", error);
@@ -148,6 +156,89 @@ static NSString *TeporaryUserToken = @"555e8e3b3c5d6387f9000002_8538477eea20bc19
     [self editText:lastMessage.content];
     
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:lastRowIndex inSection:lastSectionIndex] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+#pragma mark - SocketRocket Delegate
+
+- (void)_reconnect
+{
+    _webSocket.delegate = nil;
+    [_webSocket close];
+    
+    NSString *formattedUrl = [NSString stringWithFormat:@"ws://localhost:8080/ws/%@?token=%@", TemporaryGroupId, TeporaryUserToken];
+    NSURL *websocketUrl = [NSURL URLWithString:formattedUrl];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:websocketUrl];
+    _webSocket = [[SRWebSocket alloc] initWithURLRequest:urlRequest];
+    _webSocket.delegate = self;
+    NSLog(@"Opening connection to %@", formattedUrl);
+    [_webSocket open];
+}
+
+- (void)webSocketDidOpen:(SRWebSocket *)webSocket;
+{
+    NSLog(@"Websocket Connected");
+    [self.rightButton setEnabled:YES];
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
+{
+    NSLog(@":( Websocket Failed With Error %@", error);
+    _webSocket = nil;
+    // TODO:: disable send button
+    [self.rightButton setEnabled:NO];
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
+{
+    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+
+    Messages *newMessage = [Messages new];
+    newMessage.content = [msg valueForKey:@"content"];
+    newMessage.group = [msg valueForKey:@"group"];
+    newMessage.time = [msg valueForKey:@"time"];
+    newMessage.type = [msg valueForKey:@"type"];
+    newMessage.sender = [msg valueForKey:@"sender"];
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.messages.count inSection:0];
+
+    [self.tableView beginUpdates];
+    [self.messages insertObject:newMessage atIndex:self.messages.count];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
+    
+    // Fixes the cell from blinking (because of the transform, when using translucent cells)
+    // See https://github.com/slackhq/SlackTextViewController/issues/94#issuecomment-69929927
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
+{
+    NSLog(@"WebSocket closed");
+    _webSocket = nil;
+    [self.rightButton setEnabled:NO];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self _reconnect];
+}
+
+- (void)reconnect:(id)sender
+{
+    [self _reconnect];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    _webSocket.delegate = nil;
+    [_webSocket close];
+    _webSocket = nil;
 }
 
 #pragma mark - SLKTextViewController Events
@@ -188,6 +279,14 @@ static NSString *TeporaryUserToken = @"555e8e3b3c5d6387f9000002_8538477eea20bc19
     
     // This little trick validates any pending auto-correction or auto-spelling just after hitting the 'Send' button
     [self.textView refreshFirstResponder];
+    
+    NSError *error;
+    NSString *content = [self.textView.text copy];
+    NSDictionary *message = @{@"content": content,
+                              @"groupId": TemporaryGroupId};
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:message options:kNilOptions error:&error];
+    NSString *msgString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [_webSocket send:msgString];
     
     [super didPressRightButton:sender];
 }

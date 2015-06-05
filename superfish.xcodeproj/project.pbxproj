@@ -22,6 +22,7 @@
 		879C83AC1B20E5E400818ECF /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83AB1B20E5E400818ECF /* MessagesViewController.m */; };
 		879C83AF1B20E65D00818ECF /* MessagesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83AE1B20E65D00818ECF /* MessagesTableViewCell.m */; };
 		879C83B21B20E68000818ECF /* MessagesTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83B11B20E68000818ECF /* MessagesTextView.m */; };
+		879C83B51B22543400818ECF /* MessagePost.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83B41B22543400818ECF /* MessagePost.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		879C83AE1B20E65D00818ECF /* MessagesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesTableViewCell.m; sourceTree = "<group>"; };
 		879C83B01B20E68000818ECF /* MessagesTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesTextView.h; sourceTree = "<group>"; };
 		879C83B11B20E68000818ECF /* MessagesTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesTextView.m; sourceTree = "<group>"; };
+		879C83B31B22543400818ECF /* MessagePost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePost.h; sourceTree = "<group>"; };
+		879C83B41B22543400818ECF /* MessagePost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePost.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				871FC3D51B1F87A1003F9919 /* Messages.h */,
+				879C83B31B22543400818ECF /* MessagePost.h */,
+				879C83B41B22543400818ECF /* MessagePost.m */,
 				871FC3D61B1F87A1003F9919 /* Messages.m */,
 				879C83AA1B20E5E400818ECF /* MessagesViewController.h */,
 				879C83AB1B20E5E400818ECF /* MessagesViewController.m */,
@@ -327,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				879C83B51B22543400818ECF /* MessagePost.m in Sources */,
 				8722651D1B1CD24300341003 /* AppDelegate.m in Sources */,
 				871FC3D71B1F87A1003F9919 /* Messages.m in Sources */,
 				879C83AC1B20E5E400818ECF /* MessagesViewController.m in Sources */,

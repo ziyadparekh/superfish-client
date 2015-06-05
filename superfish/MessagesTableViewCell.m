@@ -110,7 +110,7 @@
         _thumbnailView.userInteractionEnabled = NO;
         _thumbnailView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
         
-        _thumbnailView.layer.cornerRadius = kAvatarSize/2.0;
+        _thumbnailView.layer.cornerRadius = kAvatarSize/15.0;
         _thumbnailView.layer.masksToBounds = YES;
     }
     return _thumbnailView;
