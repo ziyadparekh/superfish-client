@@ -90,16 +90,24 @@
 - (UILabel *)bodyLabel
 {
     if (!_bodyLabel) {
-        _bodyLabel = [UILabel new];
+        _bodyLabel = [NIAttributedLabel new];
         _bodyLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _bodyLabel.backgroundColor = [UIColor clearColor];
         _bodyLabel.userInteractionEnabled = NO;
         _bodyLabel.numberOfLines = 0;
+        _bodyLabel.autoDetectLinks = YES;
+        _bodyLabel.deferLinkDetection = YES;
         
         _bodyLabel.font = [UIFont systemFontOfSize:16.0];
         _bodyLabel.textColor = [UIColor darkGrayColor];
     }
     return _bodyLabel;
+}
+
+- (void)attributedLabel:(NIAttributedLabel *)attributedLabel didSelectTextCheckingResult:(NSTextCheckingResult *)result atPoint:(CGPoint)point
+{
+    NSLog(@"%@", result.URL);
+    [[UIApplication sharedApplication] openURL:result.URL];
 }
 
 - (UIImageView *)thumbnailView
@@ -119,12 +127,11 @@
 - (UIImageView *)attachmentView
 {
     if (!_attachmentView) {
-        _attachmentView = [UIImageView new];
+        _attachmentView = [[FLAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, 200.0f, 200.0f)];
         _attachmentView.translatesAutoresizingMaskIntoConstraints = NO;
-        _attachmentView.userInteractionEnabled = NO;
+        _attachmentView.userInteractionEnabled = YES;
         _attachmentView.backgroundColor = [UIColor clearColor];
-        _attachmentView.contentMode = UIViewContentModeCenter;
-        
+        _attachmentView.contentMode = UIViewContentModeScaleAspectFill;
         _attachmentView.layer.cornerRadius = kAvatarSize/4.0;
         _attachmentView.layer.masksToBounds = YES;
     }

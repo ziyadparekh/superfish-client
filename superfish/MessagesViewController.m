@@ -15,6 +15,7 @@
 
 #import "SRWebSocket.h"
 #import <RestKit/RestKit.h>
+#import "FLAnimatedImageView+AFNetworking.h"
 
 static NSString *MessengerCellIdentifier = @"MessengerCell";
 static NSString *AutoCompletionCellIdentifier = @"AutoCompletionCell";
@@ -193,7 +194,7 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
     NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error;
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-
+    
     Messages *newMessage = [Messages new];
     newMessage.content = [msg valueForKey:@"content"];
     newMessage.group = [msg valueForKey:@"group"];
@@ -281,8 +282,7 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
     [self.textView refreshFirstResponder];
     
     NSError *error;
-    NSString *content = [self.textView.text copy];
-    NSDictionary *message = @{@"content": content,
+    NSDictionary *message = @{@"content": [self.textView.text copy],
                               @"groupId": TemporaryGroupId};
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:message options:kNilOptions error:&error];
     NSString *msgString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -390,16 +390,28 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
 - (MessagesTableViewCell *)messageCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MessagesTableViewCell *cell = (MessagesTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:MessengerCellIdentifier];
-    
-    if (!cell.textLabel.text) {
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(editCellMessage:)];
-        [cell addGestureRecognizer:longPress];
-    }
-    
     Messages *message = self.messages[indexPath.row];
     
+    cell.attachmentView.image = nil;
+    cell.attachmentView.animatedImage = nil;
+    
+    if ([self didMessageContainImageURL:message.content]) {
+        [cell.attachmentView setImageWithURL:[NSURL URLWithString:message.content]];
+        cell.attachmentView.layer.shouldRasterize = YES;
+        cell.attachmentView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+        message.attachment = YES;
+    } else if ([self didMessageContainGifURL:message.content]) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:message.content]];
+        [cell.attachmentView setAnimatedImageWithURLRequest:request placeholderImage:nil success:nil failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            NSLog(@"Failure downloading gif, %@", error);
+        }];
+        cell.attachmentView.layer.shouldRasterize = YES;
+        cell.attachmentView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+        message.attachment = YES;
+    }
+    
     cell.titleLabel.text = message.sender;
-    cell.bodyLabel.text = message.content;
+    cell.bodyLabel.text = message.attachment ? @"Attachment" : message.content;
     
     cell.indexPath = indexPath;
     cell.usedForMessage = YES;
@@ -409,6 +421,28 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
     cell.transform = self.tableView.transform;
     
     return cell;
+}
+
+- (BOOL)didMessageContainImageURL:(NSString *)content
+{
+    NSError *regexError;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(https?:\/\/.*\.(?:png|jpg|jpeg))" options:NSRegularExpressionCaseInsensitive error:&regexError];
+    NSUInteger numberOfMatches = [regex numberOfMatchesInString:content options:0 range:NSMakeRange(0, [content length])];
+    if (numberOfMatches > 0) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)didMessageContainGifURL:(NSString *)content
+{
+    NSError *regexError;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(https?:\/\/.*\.(?:gif))" options:NSRegularExpressionCaseInsensitive error:&regexError];
+    NSUInteger numberOfMatches = [regex numberOfMatchesInString:content options:0 range:NSMakeRange(0, [content length])];
+    if (numberOfMatches > 0) {
+        return YES;
+    }
+    return NO;
 }
 
 - (MessagesTableViewCell *)autoCompletionCellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -458,6 +492,9 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
         CGFloat height = CGRectGetHeight(titleBounds);
         height += CGRectGetHeight(bodyBounds);
         height += 40.0;
+        if (message.attachment) {
+            height += 80.0 + 10.0;
+        }
         
         if (height < kMinimumHeight) {
             height = kMinimumHeight;

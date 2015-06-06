@@ -7,20 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NimbusKitAttributedLabel.h"
+#import "FLAnimatedImage.h"
 
 #define kAvatarSize 30.0
 #define kMinimumHeight 50.0
 
-@interface MessagesTableViewCell : UITableViewCell
+@interface MessagesTableViewCell : UITableViewCell <NIAttributedLabelDelegate>
 
 @property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) UILabel *bodyLabel;
+@property (strong, nonatomic) NIAttributedLabel *bodyLabel;
 @property (strong, nonatomic) UIImageView *thumbnailView;
-@property (strong, nonatomic) UIImageView *attachmentView;
+@property (strong, nonatomic) FLAnimatedImageView *attachmentView;
 
 @property (strong, nonatomic) NSIndexPath *indexPath;
 
 @property (nonatomic, readonly) BOOL needsPlaceholder;
 @property (nonatomic) BOOL usedForMessage;
+
+- (void)attributedLabel:(NIAttributedLabel *)attributedLabel didSelectTextCheckingResult:(NSTextCheckingResult *)result atPoint:(CGPoint)point;
 
 @end

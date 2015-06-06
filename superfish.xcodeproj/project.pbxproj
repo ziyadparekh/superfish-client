@@ -23,6 +23,9 @@
 		879C83AF1B20E65D00818ECF /* MessagesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83AE1B20E65D00818ECF /* MessagesTableViewCell.m */; };
 		879C83B21B20E68000818ECF /* MessagesTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83B11B20E68000818ECF /* MessagesTextView.m */; };
 		879C83B51B22543400818ECF /* MessagePost.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83B41B22543400818ECF /* MessagePost.m */; };
+		879C83BC1B2387F100818ECF /* NIAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83B71B2387F100818ECF /* NIAttributedLabel.m */; };
+		879C83BD1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83BB1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.m */; };
+		879C83C21B23A94900818ECF /* FLAnimatedImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83C11B23A94900818ECF /* FLAnimatedImageView+AFNetworking.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,14 @@
 		879C83B11B20E68000818ECF /* MessagesTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesTextView.m; sourceTree = "<group>"; };
 		879C83B31B22543400818ECF /* MessagePost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePost.h; sourceTree = "<group>"; };
 		879C83B41B22543400818ECF /* MessagePost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePost.m; sourceTree = "<group>"; };
+		879C83B61B2387F100818ECF /* NIAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIAttributedLabel.h; sourceTree = "<group>"; };
+		879C83B71B2387F100818ECF /* NIAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIAttributedLabel.m; sourceTree = "<group>"; };
+		879C83B81B2387F100818ECF /* NimbusKitAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NimbusKitAttributedLabel.h; sourceTree = "<group>"; };
+		879C83B91B2387F100818ECF /* NimbusKitBasics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NimbusKitBasics.h; sourceTree = "<group>"; };
+		879C83BA1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+NimbusKitAttributedLabel.h"; sourceTree = "<group>"; };
+		879C83BB1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+NimbusKitAttributedLabel.m"; sourceTree = "<group>"; };
+		879C83C01B23A94900818ECF /* FLAnimatedImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FLAnimatedImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		879C83C11B23A94900818ECF /* FLAnimatedImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FLAnimatedImageView+AFNetworking.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +139,8 @@
 		872265161B1CD24300341003 /* superfish */ = {
 			isa = PBXGroup;
 			children = (
+				879C83BF1B23A91E00818ECF /* FLAnimatedImage+AFNetworking */,
+				879C83BE1B238BB800818ECF /* NIAttributedLabel */,
 				879C83A91B20E5BB00818ECF /* Messages */,
 				879C839F1B1FDD9400818ECF /* Groups */,
 				871FC3CF1B1F7E01003F9919 /* ZPTableViewController.h */,
@@ -195,6 +208,28 @@
 				879C83B11B20E68000818ECF /* MessagesTextView.m */,
 			);
 			name = Messages;
+			sourceTree = "<group>";
+		};
+		879C83BE1B238BB800818ECF /* NIAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				879C83B61B2387F100818ECF /* NIAttributedLabel.h */,
+				879C83B71B2387F100818ECF /* NIAttributedLabel.m */,
+				879C83B81B2387F100818ECF /* NimbusKitAttributedLabel.h */,
+				879C83B91B2387F100818ECF /* NimbusKitBasics.h */,
+				879C83BA1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.h */,
+				879C83BB1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.m */,
+			);
+			name = NIAttributedLabel;
+			sourceTree = "<group>";
+		};
+		879C83BF1B23A91E00818ECF /* FLAnimatedImage+AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				879C83C01B23A94900818ECF /* FLAnimatedImageView+AFNetworking.h */,
+				879C83C11B23A94900818ECF /* FLAnimatedImageView+AFNetworking.m */,
+			);
+			name = "FLAnimatedImage+AFNetworking";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -334,9 +369,12 @@
 			files = (
 				879C83B51B22543400818ECF /* MessagePost.m in Sources */,
 				8722651D1B1CD24300341003 /* AppDelegate.m in Sources */,
+				879C83C21B23A94900818ECF /* FLAnimatedImageView+AFNetworking.m in Sources */,
 				871FC3D71B1F87A1003F9919 /* Messages.m in Sources */,
 				879C83AC1B20E5E400818ECF /* MessagesViewController.m in Sources */,
 				8722651A1B1CD24300341003 /* main.m in Sources */,
+				879C83BC1B2387F100818ECF /* NIAttributedLabel.m in Sources */,
+				879C83BD1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.m in Sources */,
 				871FC3D41B1F7EB3003F9919 /* ZPGroup.m in Sources */,
 				872265201B1CD24300341003 /* superfish.xcdatamodeld in Sources */,
 				879C83AF1B20E65D00818ECF /* MessagesTableViewCell.m in Sources */,
@@ -466,6 +504,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = superfish/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -477,6 +516,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = superfish/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Messages : NSObject
 
@@ -15,5 +16,6 @@
 @property (strong, nonatomic) NSString *sender;
 @property (strong, nonatomic) NSString *type;
 @property (strong, nonatomic) NSString *group;
+@property (nonatomic) BOOL attachment;
 
 @end

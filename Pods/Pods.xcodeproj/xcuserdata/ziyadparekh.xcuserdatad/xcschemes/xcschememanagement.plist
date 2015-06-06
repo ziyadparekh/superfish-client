@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-FLAnimatedImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ISO8601DateFormatterValueTransformer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -30,11 +35,6 @@
 			<false/>
 		</dict>
 		<key>Pods-RestKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-SBJson.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -67,62 +67,62 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0577439BFB7643A60C52E680</key>
+		<key>25F9269CE5092E4A5B526BEA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0FA9ADA4CC80C6BD93D32956</key>
+		<key>26734F9A9B4DF2C1D7CA737B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>412B073E471BC11812EFD386</key>
+		<key>3E116BC2DDEC91FD4099366F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4253A5552B0F5C261370A23F</key>
+		<key>54C32DF91C57D1CC227DEB92</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6F5548D004115A82AAF97805</key>
+		<key>630686EBBBFF44EE4EEDB659</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8EB81C3B4F8F1374C992E006</key>
+		<key>724776DA51A7507C3D063463</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9F13D69413ABD8D62446E228</key>
+		<key>77E0338F36CC9E59FB5E63C9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A7FA7925BC0ED6F339AB1755</key>
+		<key>BD05ECD0D5BFDADDAC36E828</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C0E71A42FD69CDE2160DC1A4</key>
+		<key>C6B442205199B732A5F20FFC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C41C4288C8BDBF57FD5D5A2B</key>
+		<key>DA8E6DFE29FBFB730223A6C4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CD2C3BD7EE69FE7C00421FAA</key>
+		<key>DDE66CA173EB37D0C41EEDE6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ECBEBD9504D523ABC100CE25</key>
+		<key>E381C1294DA89C355C34906F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
