@@ -18,12 +18,6 @@
 #define COCOAPODS_VERSION_MINOR_AYVibrantButton 0
 #define COCOAPODS_VERSION_PATCH_AYVibrantButton 3
 
-// FLAnimatedImage
-#define COCOAPODS_POD_AVAILABLE_FLAnimatedImage
-#define COCOAPODS_VERSION_MAJOR_FLAnimatedImage 1
-#define COCOAPODS_VERSION_MINOR_FLAnimatedImage 0
-#define COCOAPODS_VERSION_PATCH_FLAnimatedImage 8
-
 // ISO8601DateFormatterValueTransformer
 #define COCOAPODS_POD_AVAILABLE_ISO8601DateFormatterValueTransformer
 #define COCOAPODS_VERSION_MAJOR_ISO8601DateFormatterValueTransformer 0
@@ -77,6 +71,18 @@
 #define COCOAPODS_VERSION_MAJOR_RestKit_Support 0
 #define COCOAPODS_VERSION_MINOR_RestKit_Support 24
 #define COCOAPODS_VERSION_PATCH_RestKit_Support 1
+
+// SDWebImage
+#define COCOAPODS_POD_AVAILABLE_SDWebImage
+#define COCOAPODS_VERSION_MAJOR_SDWebImage 3
+#define COCOAPODS_VERSION_MINOR_SDWebImage 7
+#define COCOAPODS_VERSION_PATCH_SDWebImage 2
+
+// SDWebImage/Core
+#define COCOAPODS_POD_AVAILABLE_SDWebImage_Core
+#define COCOAPODS_VERSION_MAJOR_SDWebImage_Core 3
+#define COCOAPODS_VERSION_MINOR_SDWebImage_Core 7
+#define COCOAPODS_VERSION_PATCH_SDWebImage_Core 2
 
 // SOCKit
 #define COCOAPODS_POD_AVAILABLE_SOCKit

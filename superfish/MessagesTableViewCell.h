@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "NimbusKitAttributedLabel.h"
-#import "FLAnimatedImage.h"
 
 #define kAvatarSize 30.0
 #define kMinimumHeight 50.0
@@ -18,7 +17,7 @@
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) NIAttributedLabel *bodyLabel;
 @property (strong, nonatomic) UIImageView *thumbnailView;
-@property (strong, nonatomic) FLAnimatedImageView *attachmentView;
+@property (strong, nonatomic) UIImageView *attachmentView;
 
 @property (strong, nonatomic) NSIndexPath *indexPath;
 

@@ -15,10 +15,12 @@
 
 #import "SRWebSocket.h"
 #import <RestKit/RestKit.h>
-#import "FLAnimatedImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 
 static NSString *MessengerCellIdentifier = @"MessengerCell";
 static NSString *AutoCompletionCellIdentifier = @"AutoCompletionCell";
+static NSString *REGEX_JPG_PNG = @"(https?:\/\/.*\.(?:png|jpg|jpeg))";
+static NSString *REGEX_GIF = @"(https?:\/\/.*\.(?:gif))";
 // TODO:: REMOVE THESE
 static NSString *TemporaryGroupId = @"5563b70a3c5d631c51000001";
 static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d840e76aa1d0480f103c634becf814baf6aa2b5d5f05de12a8";
@@ -393,25 +395,16 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
     Messages *message = self.messages[indexPath.row];
     
     cell.attachmentView.image = nil;
-    cell.attachmentView.animatedImage = nil;
-    
-    if ([self didMessageContainImageURL:message.content]) {
-        [cell.attachmentView setImageWithURL:[NSURL URLWithString:message.content]];
-        cell.attachmentView.layer.shouldRasterize = YES;
-        cell.attachmentView.layer.rasterizationScale = [UIScreen mainScreen].scale;
-        message.attachment = YES;
-    } else if ([self didMessageContainGifURL:message.content]) {
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:message.content]];
-        [cell.attachmentView setAnimatedImageWithURLRequest:request placeholderImage:nil success:nil failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-            NSLog(@"Failure downloading gif, %@", error);
-        }];
+    NSString *attachment = [self getAttachment:message.content];
+    if (attachment) {
+        [cell.attachmentView sd_setImageWithURL:[NSURL URLWithString:attachment]];
         cell.attachmentView.layer.shouldRasterize = YES;
         cell.attachmentView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         message.attachment = YES;
     }
     
     cell.titleLabel.text = message.sender;
-    cell.bodyLabel.text = message.attachment ? @"Attachment" : message.content;
+    cell.bodyLabel.text = message.content;
     
     cell.indexPath = indexPath;
     cell.usedForMessage = YES;
@@ -423,26 +416,46 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
     return cell;
 }
 
-- (BOOL)didMessageContainImageURL:(NSString *)content
+- (NSString *)getAttachment:(NSString *)content
 {
-    NSError *regexError;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(https?:\/\/.*\.(?:png|jpg|jpeg))" options:NSRegularExpressionCaseInsensitive error:&regexError];
-    NSUInteger numberOfMatches = [regex numberOfMatchesInString:content options:0 range:NSMakeRange(0, [content length])];
-    if (numberOfMatches > 0) {
-        return YES;
+    if ([self isStringGifData:content]) {
+        return [self isStringGifData:content];
+    } else if ([self isStringJPEGData:content]) {
+        return [self isStringJPEGData:content];
+    } else {
+        return nil;
     }
-    return NO;
 }
 
-- (BOOL)didMessageContainGifURL:(NSString *)content
+- (NSString *)isStringGifData:(NSString *)content
+{
+    NSString *gifData = [self didMessageContainImageURL:content withPattern:REGEX_GIF];
+    if (gifData) {
+        return gifData;
+    }
+    return nil;
+}
+
+-(NSString *)isStringJPEGData:(NSString *)content
+{
+    NSString *jpegData = [self didMessageContainImageURL:content withPattern:REGEX_JPG_PNG];
+    if (jpegData) {
+        return jpegData;
+    }
+    return nil;
+}
+
+- (NSString *)didMessageContainImageURL:(NSString *)content withPattern:(NSString *)regexString
 {
     NSError *regexError;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(https?:\/\/.*\.(?:gif))" options:NSRegularExpressionCaseInsensitive error:&regexError];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString options:NSRegularExpressionCaseInsensitive error:&regexError];
     NSUInteger numberOfMatches = [regex numberOfMatchesInString:content options:0 range:NSMakeRange(0, [content length])];
     if (numberOfMatches > 0) {
-        return YES;
+        NSTextCheckingResult *match = [regex firstMatchInString:content options:0 range:NSMakeRange(0, [content length])];
+        NSString *subString = [content substringWithRange:match.range];
+        return subString;
     }
-    return NO;
+    return nil;
 }
 
 - (MessagesTableViewCell *)autoCompletionCellForRowAtIndexPath:(NSIndexPath *)indexPath

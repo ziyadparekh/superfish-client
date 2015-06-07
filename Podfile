@@ -4,4 +4,4 @@ pod 'SocketRocket'
 pod 'NSDate-Time-Ago'
 pod 'SlackTextViewController'
 pod "AYVibrantButton"
-pod 'FLAnimatedImage', '~> 1.0'
+pod 'SDWebImage', '~>3.7'

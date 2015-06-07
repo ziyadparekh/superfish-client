@@ -14,11 +14,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-FLAnimatedImage.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-ISO8601DateFormatterValueTransformer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -35,6 +30,11 @@
 			<false/>
 		</dict>
 		<key>Pods-RestKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -67,62 +67,62 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>25F9269CE5092E4A5B526BEA</key>
+		<key>2AA3183C2F222F0203014A73</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>26734F9A9B4DF2C1D7CA737B</key>
+		<key>42259C6F67E2EAB87C9CC9EA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3E116BC2DDEC91FD4099366F</key>
+		<key>4E6590C80E5DD21F80F2084C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>54C32DF91C57D1CC227DEB92</key>
+		<key>523F149A8E63739E57BA488C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>630686EBBBFF44EE4EEDB659</key>
+		<key>6314421519AD2E008F914B46</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>724776DA51A7507C3D063463</key>
+		<key>6531C822B82F697F059A1E85</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>77E0338F36CC9E59FB5E63C9</key>
+		<key>8C3CCF9BEBB19998A3B195C3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BD05ECD0D5BFDADDAC36E828</key>
+		<key>9DF11D2A32ABB484D5171AA6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C6B442205199B732A5F20FFC</key>
+		<key>A5BB1C8F3D43860F40B96DFF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA8E6DFE29FBFB730223A6C4</key>
+		<key>E6EEE254F084C0B3C837CF00</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DDE66CA173EB37D0C41EEDE6</key>
+		<key>EAB101A0BD4FEB51D7D23246</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E381C1294DA89C355C34906F</key>
+		<key>FD61425E22BAE5BE0945CA29</key>
 		<dict>
 			<key>primary</key>
 			<true/>

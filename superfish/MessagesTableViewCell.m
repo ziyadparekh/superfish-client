@@ -127,7 +127,7 @@
 - (UIImageView *)attachmentView
 {
     if (!_attachmentView) {
-        _attachmentView = [[FLAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, 200.0f, 200.0f)];
+        _attachmentView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200.0f, 200.0f)];
         _attachmentView.translatesAutoresizingMaskIntoConstraints = NO;
         _attachmentView.userInteractionEnabled = YES;
         _attachmentView.backgroundColor = [UIColor clearColor];
