@@ -16,6 +16,8 @@
 #import "SRWebSocket.h"
 #import <RestKit/RestKit.h>
 #import "UIImageView+WebCache.h"
+#import "URBMediaFocusViewController.h"
+#import "AYVibrantButton.h"
 
 static NSString *MessengerCellIdentifier = @"MessengerCell";
 static NSString *AutoCompletionCellIdentifier = @"AutoCompletionCell";
@@ -31,6 +33,9 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
 
 @property (strong, nonatomic) NSArray *users;
 @property (strong, nonatomic) NSArray *emojis;
+@property (nonatomic) int offset;
+
+@property (nonatomic, strong) URBMediaFocusViewController *mediaFocusController;
 
 - (IBAction)reconnect:(id)sender;
 
@@ -80,6 +85,10 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
     self.keyboardPanningEnabled = YES;
     self.shouldScrollToBottomAfterKeyboardShows = YES;
     self.inverted = NO;
+    self.tableView.scrollsToTop = NO;
+    
+    self.messages = [[NSMutableArray alloc] init];
+    self.offset = 0;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[MessagesTableViewCell class] forCellReuseIdentifier:MessengerCellIdentifier];
@@ -93,7 +102,12 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
     self.textInputbar.maxCharCount = 256;
     self.textInputbar.counterStyle = SLKCounterStyleSplit;
     
+    self.tableView.tableHeaderView = [self getLoadMoreViewForTableHeader];
+    
     self.typingIndicatorView.canResignByTouch = YES;
+    
+    self.mediaFocusController = [[URBMediaFocusViewController alloc] init];
+    self.mediaFocusController.delegate = self;
     
     [self.autoCompletionView registerClass:[MessagesTableViewCell class] forCellReuseIdentifier:AutoCompletionCellIdentifier];
     [self registerPrefixesForAutoCompletion:@[@"/"]];
@@ -101,6 +115,38 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
     [self configureRestkit];
     [self loadMessages];
     
+}
+
+- (UIView *)getLoadMoreViewForTableHeader
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 50)];
+    view.backgroundColor = [UIColor clearColor];
+    AYVibrantButton *button = [[AYVibrantButton alloc] initWithFrame:CGRectMake(0, 0, 320, 40) style:AYVibrantButtonStyleTranslucent];
+    button.vibrancyEffect = nil;
+    button.text = @"Load More";
+    button.font = [UIFont boldSystemFontOfSize:18.0];
+    button.backgroundColor = [UIColor blueColor];
+    button.borderWidth = 1.0;
+    [button addGestureRecognizer:[self getTapGestureRecognizer]];
+    [button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin];
+    [view addSubview:button];
+    return view;
+}
+
+- (UIGestureRecognizer *)getTapGestureRecognizer
+{
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(LoadMoreButtonWasPressed:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    return tapGesture;
+}
+
+- (void)LoadMoreButtonWasPressed:(UIGestureRecognizer *)gesture
+{
+    
+    NSLog(@"%@", gesture.view);
+    self.offset += 20;
+    [self loadMessages];
 }
 
 #pragma mark - RestKit Configuration
@@ -126,10 +172,13 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
 {
     NSDictionary *queryParams = @{@"token": TeporaryUserToken,
                                   @"limit": @20,
-                                  @"offset": @0
+                                  @"offset": [NSNumber numberWithInt:self.offset]
                                   };
     [[RKObjectManager sharedManager] getObjectsAtPath:[NSString stringWithFormat:@"/group/%@/messages", TemporaryGroupId] parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        self.messages = [[[mappingResult.array reverseObjectEnumerator] allObjects] mutableCopy];
+        NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,[mappingResult.array count])];
+        [self.messages insertObjects:[[mappingResult.array reverseObjectEnumerator] allObjects] atIndexes:indexes];
+        //[self.messages addObjectsFromArray:[[mappingResult.array reverseObjectEnumerator] allObjects]];
+        //self.messages = [[[mappingResult.array reverseObjectEnumerator] allObjects] mutableCopy];
         [self.tableView reloadData];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"There was an error : %@", error);
@@ -394,6 +443,13 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
     MessagesTableViewCell *cell = (MessagesTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:MessengerCellIdentifier];
     Messages *message = self.messages[indexPath.row];
     
+    if (!cell.textLabel.text) {
+        UITapGestureRecognizer *tapPress = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFocusView:)];
+        tapPress.numberOfTapsRequired = 1;
+        tapPress.numberOfTouchesRequired = 1;
+        [cell.attachmentView addGestureRecognizer:tapPress];
+    }
+    
     cell.attachmentView.image = nil;
     NSString *attachment = [self getAttachment:message.content];
     if (attachment) {
@@ -414,6 +470,13 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
     cell.transform = self.tableView.transform;
     
     return cell;
+}
+
+- (void)showFocusView:(UITapGestureRecognizer *)gestureRecognizer
+{
+    UIImageView *tappedImageView = (UIImageView *)gestureRecognizer.view;
+    UIImage *img = tappedImageView.image;
+    [self.mediaFocusController showImage:img fromView:tappedImageView];
 }
 
 - (NSString *)getAttachment:(NSString *)content
@@ -517,7 +580,6 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
         return kMinimumHeight;
     }
 }
-
 
 
 #pragma mark - <UITableViewDelegate>

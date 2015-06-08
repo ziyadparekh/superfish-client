@@ -7,8 +7,9 @@
 //
 
 #import "SLKTextViewController.h"
+#import "URBMediaFocusViewController.h"
 
-@interface MessagesViewController : SLKTextViewController 
+@interface MessagesViewController : SLKTextViewController <URBMediaFocusViewControllerDelegate>
 
 
 @end

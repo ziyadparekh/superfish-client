@@ -114,3 +114,9 @@
 #define COCOAPODS_VERSION_MINOR_TransitionKit 1
 #define COCOAPODS_VERSION_PATCH_TransitionKit 1
 
+// URBMediaFocusViewController
+#define COCOAPODS_POD_AVAILABLE_URBMediaFocusViewController
+#define COCOAPODS_VERSION_MAJOR_URBMediaFocusViewController 0
+#define COCOAPODS_VERSION_MINOR_URBMediaFocusViewController 5
+#define COCOAPODS_VERSION_PATCH_URBMediaFocusViewController 8
+

@@ -5,3 +5,4 @@ pod 'NSDate-Time-Ago'
 pod 'SlackTextViewController'
 pod "AYVibrantButton"
 pod 'SDWebImage', '~>3.7'
+pod "URBMediaFocusViewController"
