@@ -1,47 +1,50 @@
 //
-//  ZPTableViewController.m
-//  
+//  GroupsTableViewController.m
+//  superfish
 //
-//  Created by Ziyad Parekh on 6/3/15.
-//
+//  Created by Ziyad Parekh on 6/9/15.
+//  Copyright (c) 2015 Ziyad Parekh. All rights reserved.
 //
 
-#import "ZPTableViewController.h"
-//#import "ZPGroupTableViewCell.h"
-#import <RestKit/RestKit.h>
-#import <NSDate-Time-Ago/NSDate+NVTimeAgo.h>
-#import "MessagesViewController.h"
+#import "GroupsTableViewController.h"
+#import "GroupsTableViewCell.h"
 #import "ZPGroup.h"
 #import "Messages.h"
 
-@interface ZPTableViewController ()
+#import <RestKit/RestKit.h>
+
+
+
+static NSString *GroupCellIdentifier = @"GroupCell";
+static NSString *TeporaryUserToken = @"555e8e3b3c5d6387f9000002_8538477eea20bc193e81c4785e369aa2186ad34ea8b896a67a608c1937a3cd63";
+
+@interface GroupsTableViewController ()
 
 @property (strong, nonatomic) NSArray *groups;
 
 @end
 
-@implementation ZPTableViewController
+@implementation GroupsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Configure Restkit
-    [self configureRestkit];
-    [self loadGroups];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    
+    
+    [self.tableView registerClass:[GroupsTableViewCell class] forCellReuseIdentifier:GroupCellIdentifier];
+    self.tableView.rowHeight = 72.0;
+    [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 30, 0, 0)];
+    
+    // Configure Restkit
+    [self configureRestkit];
+    [self loadGroups];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Restkit Implementation
 
 - (void) configureRestkit {
     NSURL *baseUrl = [NSURL URLWithString:@"http://localhost:8080"];
@@ -68,14 +71,18 @@
 }
 
 - (void) loadGroups {
-    NSString *token = @"555e8e3b3c5d6387f9000002_8538477eea20bc193e81c4785e369aa2186ad34ea8b896a67a608c1937a3cd63";
-    NSDictionary *queryParams = @{@"token" : token};
+    NSDictionary *queryParams = @{@"token" : TeporaryUserToken};
     [[RKObjectManager sharedManager] getObjectsAtPath:@"/groups" parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         self.groups = mappingResult.array;
         [self.tableView reloadData];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"There was an error : %@", error);
     }];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -87,41 +94,20 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.groups count];
+    return self.groups.count;
 }
 
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    // Configure the cell...
-//    ZPGroupTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-//    
-//    ZPGroup *group = self.groups[indexPath.row];
-//    
-//    cell.groupName.text = [self getNameForGroup:group];
-//    cell.groupMessage.text = [self getLastMessageForGroup:group];
-//    cell.groupDate.text = [self getGroupActivity:group];
-//    
-//    return cell;
-//}
-
-#pragma mark - TableView Cell data source
-
-- (NSString *)getNameForGroup:(ZPGroup *)group {
-    return group.name;
-}
-
-- (NSString *)getLastMessageForGroup:(ZPGroup *) group {
-    Messages *msg = [group.messages objectAtIndex:0];
-    return msg.content;
-}
-
-- (NSString *)getGroupActivity:(ZPGroup *)group {
-    NSString *activity = group.activity;
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'-'HH:mm"];
-    NSDate *date = [formatter dateFromString:activity];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    GroupsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:GroupCellIdentifier forIndexPath:indexPath];
     
-    return [date formattedAsTimeAgo];
+    // Configure the cell...
+    ZPGroup *group = self.groups[indexPath.row];
+    cell.groupNameLabel.text = group.name;
+    cell.lastMessageTextLabel.text = [group getLastMessageForGroup:group];
+    cell.lastMessageSentDateLabel.text = [group getGroupActivity:group];
+    
+    return cell;
 }
 
 
@@ -159,20 +145,14 @@
 }
 */
 
-
+/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"GroupToMessagesSegue"]) {
-        //NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        //MessagesViewController *destinationViewController = [segue destinationViewController];
-        //destinationViewController.group = [self.groups objectAtIndex:indexPath.row];
-        
-    }
 }
-
+*/
 
 @end

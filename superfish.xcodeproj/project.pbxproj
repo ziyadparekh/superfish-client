@@ -11,7 +11,6 @@
 		871FC3D11B1F7E01003F9919 /* ZPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D01B1F7E01003F9919 /* ZPTableViewController.m */; };
 		871FC3D41B1F7EB3003F9919 /* ZPGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D31B1F7EB3003F9919 /* ZPGroup.m */; };
 		871FC3D71B1F87A1003F9919 /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D61B1F87A1003F9919 /* Messages.m */; };
-		871FC3DA1B1F9267003F9919 /* ZPGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D91B1F9267003F9919 /* ZPGroupTableViewCell.m */; };
 		8722651A1B1CD24300341003 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 872265191B1CD24300341003 /* main.m */; };
 		8722651D1B1CD24300341003 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8722651C1B1CD24300341003 /* AppDelegate.m */; };
 		872265201B1CD24300341003 /* superfish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8722651E1B1CD24300341003 /* superfish.xcdatamodeld */; };
@@ -25,6 +24,12 @@
 		879C83B51B22543400818ECF /* MessagePost.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83B41B22543400818ECF /* MessagePost.m */; };
 		879C83BC1B2387F100818ECF /* NIAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83B71B2387F100818ECF /* NIAttributedLabel.m */; };
 		879C83BD1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83BB1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.m */; };
+		87D0FFA01B27E1A50028E284 /* GroupsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FF9F1B27E1A50028E284 /* GroupsTableViewController.m */; };
+		87D0FFA31B27E4650028E284 /* GroupsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFA21B27E4650028E284 /* GroupsTableViewCell.m */; };
+		87D0FFA71B2CB7D10028E284 /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFA61B2CB7D10028E284 /* ContactsTableViewController.m */; };
+		87D0FFAA1B2CC4F90028E284 /* Contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFA91B2CC4F90028E284 /* Contacts.m */; };
+		87D0FFAD1B2CCBC10028E284 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFAC1B2CCBC10028E284 /* Contact.m */; };
+		87D0FFB01B2CD6480028E284 /* Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFAF1B2CD6480028E284 /* Phone.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,8 +52,6 @@
 		871FC3D31B1F7EB3003F9919 /* ZPGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPGroup.m; sourceTree = "<group>"; };
 		871FC3D51B1F87A1003F9919 /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
 		871FC3D61B1F87A1003F9919 /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
-		871FC3D81B1F9267003F9919 /* ZPGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPGroupTableViewCell.h; sourceTree = "<group>"; };
-		871FC3D91B1F9267003F9919 /* ZPGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPGroupTableViewCell.m; sourceTree = "<group>"; };
 		872265141B1CD24300341003 /* superfish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = superfish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		872265181B1CD24300341003 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		872265191B1CD24300341003 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -75,6 +78,18 @@
 		879C83B91B2387F100818ECF /* NimbusKitBasics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NimbusKitBasics.h; sourceTree = "<group>"; };
 		879C83BA1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+NimbusKitAttributedLabel.h"; sourceTree = "<group>"; };
 		879C83BB1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+NimbusKitAttributedLabel.m"; sourceTree = "<group>"; };
+		87D0FF9E1B27E1A50028E284 /* GroupsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsTableViewController.h; sourceTree = "<group>"; };
+		87D0FF9F1B27E1A50028E284 /* GroupsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsTableViewController.m; sourceTree = "<group>"; };
+		87D0FFA11B27E4650028E284 /* GroupsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsTableViewCell.h; sourceTree = "<group>"; };
+		87D0FFA21B27E4650028E284 /* GroupsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsTableViewCell.m; sourceTree = "<group>"; };
+		87D0FFA51B2CB7D10028E284 /* ContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsTableViewController.h; sourceTree = "<group>"; };
+		87D0FFA61B2CB7D10028E284 /* ContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsTableViewController.m; sourceTree = "<group>"; };
+		87D0FFA81B2CC4F90028E284 /* Contacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contacts.h; sourceTree = "<group>"; };
+		87D0FFA91B2CC4F90028E284 /* Contacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contacts.m; sourceTree = "<group>"; };
+		87D0FFAB1B2CCBC10028E284 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		87D0FFAC1B2CCBC10028E284 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		87D0FFAE1B2CD6480028E284 /* Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Phone.h; sourceTree = "<group>"; };
+		87D0FFAF1B2CD6480028E284 /* Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Phone.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +151,7 @@
 		872265161B1CD24300341003 /* superfish */ = {
 			isa = PBXGroup;
 			children = (
+				87D0FFA41B2CB2760028E284 /* Contacts */,
 				879C83BE1B238BB800818ECF /* NIAttributedLabel */,
 				879C83A91B20E5BB00818ECF /* Messages */,
 				879C839F1B1FDD9400818ECF /* Groups */,
@@ -144,8 +160,6 @@
 				8722651B1B1CD24300341003 /* AppDelegate.h */,
 				8722651C1B1CD24300341003 /* AppDelegate.m */,
 				872265241B1CD24300341003 /* Main.storyboard */,
-				871FC3D81B1F9267003F9919 /* ZPGroupTableViewCell.h */,
-				871FC3D91B1F9267003F9919 /* ZPGroupTableViewCell.m */,
 				872265271B1CD24300341003 /* Images.xcassets */,
 				872265291B1CD24300341003 /* LaunchScreen.xib */,
 				8722651E1B1CD24300341003 /* superfish.xcdatamodeld */,
@@ -185,6 +199,10 @@
 			children = (
 				871FC3D21B1F7EB3003F9919 /* ZPGroup.h */,
 				871FC3D31B1F7EB3003F9919 /* ZPGroup.m */,
+				87D0FF9E1B27E1A50028E284 /* GroupsTableViewController.h */,
+				87D0FF9F1B27E1A50028E284 /* GroupsTableViewController.m */,
+				87D0FFA11B27E4650028E284 /* GroupsTableViewCell.h */,
+				87D0FFA21B27E4650028E284 /* GroupsTableViewCell.m */,
 			);
 			name = Groups;
 			sourceTree = "<group>";
@@ -192,9 +210,9 @@
 		879C83A91B20E5BB00818ECF /* Messages */ = {
 			isa = PBXGroup;
 			children = (
-				871FC3D51B1F87A1003F9919 /* Messages.h */,
 				879C83B31B22543400818ECF /* MessagePost.h */,
 				879C83B41B22543400818ECF /* MessagePost.m */,
+				871FC3D51B1F87A1003F9919 /* Messages.h */,
 				871FC3D61B1F87A1003F9919 /* Messages.m */,
 				879C83AA1B20E5E400818ECF /* MessagesViewController.h */,
 				879C83AB1B20E5E400818ECF /* MessagesViewController.m */,
@@ -217,6 +235,21 @@
 				879C83BB1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.m */,
 			);
 			name = NIAttributedLabel;
+			sourceTree = "<group>";
+		};
+		87D0FFA41B2CB2760028E284 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				87D0FFA51B2CB7D10028E284 /* ContactsTableViewController.h */,
+				87D0FFA61B2CB7D10028E284 /* ContactsTableViewController.m */,
+				87D0FFA81B2CC4F90028E284 /* Contacts.h */,
+				87D0FFA91B2CC4F90028E284 /* Contacts.m */,
+				87D0FFAB1B2CCBC10028E284 /* Contact.h */,
+				87D0FFAC1B2CCBC10028E284 /* Contact.m */,
+				87D0FFAE1B2CD6480028E284 /* Phone.h */,
+				87D0FFAF1B2CD6480028E284 /* Phone.m */,
+			);
+			name = Contacts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,18 +387,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87D0FFB01B2CD6480028E284 /* Phone.m in Sources */,
 				879C83B51B22543400818ECF /* MessagePost.m in Sources */,
+				87D0FFAD1B2CCBC10028E284 /* Contact.m in Sources */,
 				8722651D1B1CD24300341003 /* AppDelegate.m in Sources */,
+				87D0FFA71B2CB7D10028E284 /* ContactsTableViewController.m in Sources */,
 				871FC3D71B1F87A1003F9919 /* Messages.m in Sources */,
+				87D0FFAA1B2CC4F90028E284 /* Contacts.m in Sources */,
 				879C83AC1B20E5E400818ECF /* MessagesViewController.m in Sources */,
 				8722651A1B1CD24300341003 /* main.m in Sources */,
+				87D0FFA31B27E4650028E284 /* GroupsTableViewCell.m in Sources */,
 				879C83BC1B2387F100818ECF /* NIAttributedLabel.m in Sources */,
 				879C83BD1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.m in Sources */,
 				871FC3D41B1F7EB3003F9919 /* ZPGroup.m in Sources */,
+				87D0FFA01B27E1A50028E284 /* GroupsTableViewController.m in Sources */,
 				872265201B1CD24300341003 /* superfish.xcdatamodeld in Sources */,
 				879C83AF1B20E65D00818ECF /* MessagesTableViewCell.m in Sources */,
 				871FC3D11B1F7E01003F9919 /* ZPTableViewController.m in Sources */,
-				871FC3DA1B1F9267003F9919 /* ZPGroupTableViewCell.m in Sources */,
 				879C83B21B20E68000818ECF /* MessagesTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

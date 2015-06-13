@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <NSDate-Time-Ago/NSDate+NVTimeAgo.h>
+
+#import "Messages.h"
 
 @interface ZPGroup : NSObject
 
@@ -14,5 +17,8 @@
 @property (strong, nonatomic) NSString *activity;
 @property (strong, nonatomic) NSArray *messages;
 @property (strong, nonatomic) NSString *groupId;
+
+- (NSString *)getLastMessageForGroup:(ZPGroup *) group;
+- (NSString *)getGroupActivity:(ZPGroup *)group;
 
 @end

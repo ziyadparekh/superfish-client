@@ -10,4 +10,18 @@
 
 @implementation ZPGroup
 
+- (NSString *)getLastMessageForGroup:(ZPGroup *) group {
+    Messages *msg = [group.messages objectAtIndex:0];
+    return msg.content;
+}
+
+- (NSString *)getGroupActivity:(ZPGroup *)group {
+    NSString *activity = group.activity;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'-'HH:mm"];
+    NSDate *date = [formatter dateFromString:activity];
+    
+    return [date formattedAsTimeAgo];
+}
+
 @end
