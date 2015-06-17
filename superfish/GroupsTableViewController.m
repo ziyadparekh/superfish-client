@@ -10,13 +10,14 @@
 #import "GroupsTableViewCell.h"
 #import "ZPGroup.h"
 #import "Messages.h"
+#import "Contacts.h"
 
 #import <RestKit/RestKit.h>
 
 
 
 static NSString *GroupCellIdentifier = @"GroupCell";
-static NSString *TeporaryUserToken = @"555e8e3b3c5d6387f9000002_8538477eea20bc193e81c4785e369aa2186ad34ea8b896a67a608c1937a3cd63";
+static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3c494181d910d3c7dc7cbe76e0ad6e1ebba80d404740c4cd7";
 
 @interface GroupsTableViewController ()
 
@@ -55,7 +56,7 @@ static NSString *TeporaryUserToken = @"555e8e3b3c5d6387f9000002_8538477eea20bc19
     
     // setup object mappings
     RKObjectMapping *groupMapping = [RKObjectMapping mappingForClass:[ZPGroup class]];
-    [groupMapping addAttributeMappingsFromArray:@[@"name", @"activity", @"groupId"]];
+    [groupMapping addAttributeMappingsFromArray:@[@"name", @"activity", @"groupId", @"members"]];
     
     RKObjectMapping *messagesMapping = [RKObjectMapping mappingForClass:[Messages class]];
     [messagesMapping addAttributeMappingsFromArray:@[@"content", @"time"]];
@@ -103,13 +104,27 @@ static NSString *TeporaryUserToken = @"555e8e3b3c5d6387f9000002_8538477eea20bc19
     
     // Configure the cell...
     ZPGroup *group = self.groups[indexPath.row];
-    cell.groupNameLabel.text = group.name;
+    cell.groupNameLabel.text = [self getGroupName:group];
     cell.lastMessageTextLabel.text = [group getLastMessageForGroup:group];
     cell.lastMessageSentDateLabel.text = [group getGroupActivity:group];
     
     return cell;
 }
 
+- (NSString *)getGroupName:(ZPGroup *)group
+{
+    if (group.members.count == 1) {
+        return @"Botler";
+    }
+    if (group.name.length == 0) {
+        NSMutableArray *usernames = [[NSMutableArray alloc] initWithCapacity:[group.members count]];
+        for (NSDictionary *user in group.members) {
+            [usernames addObject:user[@"username"]];
+        }
+        return [usernames componentsJoinedByString:@", "];
+    }
+    return group.name;
+}
 
 /*
 // Override to support conditional editing of the table view.

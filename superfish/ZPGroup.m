@@ -11,6 +11,9 @@
 @implementation ZPGroup
 
 - (NSString *)getLastMessageForGroup:(ZPGroup *) group {
+    if ([group.messages count] == 0) {
+        return @"";
+    }
     Messages *msg = [group.messages objectAtIndex:0];
     return msg.content;
 }

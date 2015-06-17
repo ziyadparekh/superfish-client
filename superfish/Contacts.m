@@ -10,4 +10,10 @@
 
 @implementation Contacts
 
+- (NSString *)getUsername
+{
+    return self.username;
+    
+}
+
 @end

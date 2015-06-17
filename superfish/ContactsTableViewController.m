@@ -12,7 +12,7 @@
 
 #import "Contacts.h"
 
-static NSString *TeporaryUserToken = @"555e8e3b3c5d6387f9000002_8538477eea20bc193e81c4785e369aa2186ad34ea8b896a67a608c1937a3cd63";
+static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb45e77f9153bf8d4959facacd2db395fb67cbf3a1d5fd6ddc";
 
 @interface ContactsTableViewController ()
 {
@@ -70,7 +70,7 @@ static NSString *TeporaryUserToken = @"555e8e3b3c5d6387f9000002_8538477eea20bc19
     RKObjectMapping *requestMapping = [RKObjectMapping requestMapping];
     [requestMapping addAttributeMappingsFromArray:@[@"contacts"]];
     
-    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[NSMutableDictionary class] rootKeyPath:nil method:RKRequestMethodAny];
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[NSDictionary class] rootKeyPath:nil method:RKRequestMethodAny];
     
     [objectManager addResponseDescriptor:responseDescriptor];
     [objectManager addRequestDescriptor:requestDescriptor];
@@ -134,18 +134,14 @@ static NSString *TeporaryUserToken = @"555e8e3b3c5d6387f9000002_8538477eea20bc19
 - (void)loadUsers
 {
     NSDictionary *queryParams = @{@"token": TeporaryUserToken};
-    
+
     NSMutableArray *tmpContacts = [[NSMutableArray alloc] init];
     for (NSDictionary *user in users1) {
         [tmpContacts addObjectsFromArray:user[@"phones"]];
     }
-    
-    NSMutableDictionary *contacts = [[NSMutableDictionary alloc] init];
-    [contacts setObject:tmpContacts forKey:@"contacts"];
-
+    NSDictionary *contacts = [[NSDictionary alloc] initWithObjects:@[tmpContacts] forKeys:@[@"contacts"]];
     
     [[RKObjectManager sharedManager] postObject:contacts path:@"/contacts" parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        NSLog(@"%@", mappingResult.array);
         [users2 removeAllObjects];
         for (Contacts *contact in mappingResult.array) {
             [users2 addObject:contact];

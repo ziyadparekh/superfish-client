@@ -17,6 +17,8 @@
 @property (strong, nonatomic) NSString *activity;
 @property (strong, nonatomic) NSArray *messages;
 @property (strong, nonatomic) NSString *groupId;
+@property (strong, nonatomic) NSArray *members;
+@property (strong, nonatomic) NSString *admin;
 
 - (NSString *)getLastMessageForGroup:(ZPGroup *) group;
 - (NSString *)getGroupActivity:(ZPGroup *)group;

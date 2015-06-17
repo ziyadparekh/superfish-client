@@ -28,8 +28,7 @@
 		87D0FFA31B27E4650028E284 /* GroupsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFA21B27E4650028E284 /* GroupsTableViewCell.m */; };
 		87D0FFA71B2CB7D10028E284 /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFA61B2CB7D10028E284 /* ContactsTableViewController.m */; };
 		87D0FFAA1B2CC4F90028E284 /* Contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFA91B2CC4F90028E284 /* Contacts.m */; };
-		87D0FFAD1B2CCBC10028E284 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFAC1B2CCBC10028E284 /* Contact.m */; };
-		87D0FFB01B2CD6480028E284 /* Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFAF1B2CD6480028E284 /* Phone.m */; };
+		87D0FFBB1B2E72D30028E284 /* ComposeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFB91B2E72D30028E284 /* ComposeTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,10 +85,8 @@
 		87D0FFA61B2CB7D10028E284 /* ContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsTableViewController.m; sourceTree = "<group>"; };
 		87D0FFA81B2CC4F90028E284 /* Contacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contacts.h; sourceTree = "<group>"; };
 		87D0FFA91B2CC4F90028E284 /* Contacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contacts.m; sourceTree = "<group>"; };
-		87D0FFAB1B2CCBC10028E284 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
-		87D0FFAC1B2CCBC10028E284 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
-		87D0FFAE1B2CD6480028E284 /* Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Phone.h; sourceTree = "<group>"; };
-		87D0FFAF1B2CD6480028E284 /* Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Phone.m; sourceTree = "<group>"; };
+		87D0FFB81B2E72D30028E284 /* ComposeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeTableViewController.h; sourceTree = "<group>"; };
+		87D0FFB91B2E72D30028E284 /* ComposeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +194,7 @@
 		879C839F1B1FDD9400818ECF /* Groups */ = {
 			isa = PBXGroup;
 			children = (
+				87D0FFB11B2E63780028E284 /* Compose */,
 				871FC3D21B1F7EB3003F9919 /* ZPGroup.h */,
 				871FC3D31B1F7EB3003F9919 /* ZPGroup.m */,
 				87D0FF9E1B27E1A50028E284 /* GroupsTableViewController.h */,
@@ -244,12 +242,17 @@
 				87D0FFA61B2CB7D10028E284 /* ContactsTableViewController.m */,
 				87D0FFA81B2CC4F90028E284 /* Contacts.h */,
 				87D0FFA91B2CC4F90028E284 /* Contacts.m */,
-				87D0FFAB1B2CCBC10028E284 /* Contact.h */,
-				87D0FFAC1B2CCBC10028E284 /* Contact.m */,
-				87D0FFAE1B2CD6480028E284 /* Phone.h */,
-				87D0FFAF1B2CD6480028E284 /* Phone.m */,
 			);
 			name = Contacts;
+			sourceTree = "<group>";
+		};
+		87D0FFB11B2E63780028E284 /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				87D0FFB81B2E72D30028E284 /* ComposeTableViewController.h */,
+				87D0FFB91B2E72D30028E284 /* ComposeTableViewController.m */,
+			);
+			name = Compose;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,10 +390,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87D0FFB01B2CD6480028E284 /* Phone.m in Sources */,
 				879C83B51B22543400818ECF /* MessagePost.m in Sources */,
-				87D0FFAD1B2CCBC10028E284 /* Contact.m in Sources */,
 				8722651D1B1CD24300341003 /* AppDelegate.m in Sources */,
+				87D0FFBB1B2E72D30028E284 /* ComposeTableViewController.m in Sources */,
 				87D0FFA71B2CB7D10028E284 /* ContactsTableViewController.m in Sources */,
 				871FC3D71B1F87A1003F9919 /* Messages.m in Sources */,
 				87D0FFAA1B2CC4F90028E284 /* Contacts.m in Sources */,

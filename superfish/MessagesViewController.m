@@ -24,8 +24,8 @@ static NSString *AutoCompletionCellIdentifier = @"AutoCompletionCell";
 static NSString *REGEX_JPG_PNG = @"(https?:\/\/.*\.(?:png|jpg|jpeg))";
 static NSString *REGEX_GIF = @"(https?:\/\/.*\.(?:gif))";
 // TODO:: REMOVE THESE
-static NSString *TemporaryGroupId = @"5563b70a3c5d631c51000001";
-static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d840e76aa1d0480f103c634becf814baf6aa2b5d5f05de12a8";
+static NSString *TemporaryGroupId = @"557fb60a3c5d63b6ab000001";
+static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb45e77f9153bf8d4959facacd2db395fb67cbf3a1d5fd6ddc";
 
 @interface MessagesViewController () <SRWebSocketDelegate>
 
@@ -83,7 +83,7 @@ static NSString *TeporaryUserToken = @"555e8e2e3c5d6387f9000001_bdbc5703808422d8
     self.bounces = YES;
     self.shakeToClearEnabled = YES;
     self.keyboardPanningEnabled = YES;
-    self.shouldScrollToBottomAfterKeyboardShows = YES;
+    self.shouldScrollToBottomAfterKeyboardShows = NO;
     self.inverted = NO;
     self.tableView.scrollsToTop = NO;
     
