@@ -11,6 +11,8 @@
 #import "MessagesTextView.h"
 #import "MessagePost.h"
 #import "Messages.h"
+#import "MessagesManager.h"
+#import "MappingProvider.h"
 
 
 #import "SRWebSocket.h"
@@ -112,7 +114,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     [self.autoCompletionView registerClass:[MessagesTableViewCell class] forCellReuseIdentifier:AutoCompletionCellIdentifier];
     [self registerPrefixesForAutoCompletion:@[@"/"]];
     
-    [self configureRestkit];
+    //[self configureRestkit];
     [self loadMessages];
     
 }
@@ -164,21 +166,20 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
                                                      @"time",
                                                      @"group"]];
     
-    RKResponseDescriptor *responseDiscriptor = [RKResponseDescriptor responseDescriptorWithMapping:messagesMapping method:RKRequestMethodGET pathPattern:[NSString stringWithFormat:@"/group/%@/messages", TemporaryGroupId] keyPath:@"response" statusCodes:[NSIndexSet indexSetWithIndex:200]];
+    RKResponseDescriptor *responseDiscriptor = [RKResponseDescriptor responseDescriptorWithMapping:messagesMapping method:RKRequestMethodGET pathPattern:[NSString stringWithFormat:@"/group/%@/messages", self.group.groupId] keyPath:@"response" statusCodes:[NSIndexSet indexSetWithIndex:200]];
     [objectManager addResponseDescriptor:responseDiscriptor];
 }
 
 - (void)loadMessages
 {
-    NSDictionary *queryParams = @{@"token": TeporaryUserToken,
-                                  @"limit": @20,
-                                  @"offset": [NSNumber numberWithInt:self.offset]
-                                  };
-    [[RKObjectManager sharedManager] getObjectsAtPath:[NSString stringWithFormat:@"/group/%@/messages", TemporaryGroupId] parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,[mappingResult.array count])];
-        [self.messages insertObjects:[[mappingResult.array reverseObjectEnumerator] allObjects] atIndexes:indexes];
-        //[self.messages addObjectsFromArray:[[mappingResult.array reverseObjectEnumerator] allObjects]];
-        //self.messages = [[[mappingResult.array reverseObjectEnumerator] allObjects] mutableCopy];
+    RKObjectMapping *messagesMapping = [MappingProvider messagesForGroupMapping];
+    RKResponseDescriptor *responseDiscriptor = [RKResponseDescriptor responseDescriptorWithMapping:messagesMapping method:RKRequestMethodGET pathPattern:[NSString stringWithFormat:@"/group/%@/messages", self.group.groupId] keyPath:@"response" statusCodes:[NSIndexSet indexSetWithIndex:200]];
+    
+    [[MessagesManager sharedManager] addResponseDescriptor:responseDiscriptor];
+    
+    [[MessagesManager sharedManager] loadGroupMessagesForGroup:self.group.groupId withOffset:self.offset withBlock:^(NSArray *messages) {
+        NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,[messages count])];
+        [self.messages insertObjects:[[messages reverseObjectEnumerator] allObjects] atIndexes:indexes];
         [self.tableView reloadData];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"There was an error : %@", error);
@@ -217,7 +218,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     _webSocket.delegate = nil;
     [_webSocket close];
     
-    NSString *formattedUrl = [NSString stringWithFormat:@"ws://localhost:8080/ws/%@?token=%@", TemporaryGroupId, TeporaryUserToken];
+    NSString *formattedUrl = [NSString stringWithFormat:@"ws://localhost:8080/ws/%@?token=%@", self.group.groupId, TeporaryUserToken];
     NSURL *websocketUrl = [NSURL URLWithString:formattedUrl];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:websocketUrl];
     _webSocket = [[SRWebSocket alloc] initWithURLRequest:urlRequest];
@@ -286,6 +287,13 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
+        if (self.delegate != nil) {
+            NSLog(@"view should call delegate method");
+            [self.delegate didGoBackToGroupViewControllerFrom:self];
+        }
+    }
+    
     [super viewWillDisappear:animated];
     
     _webSocket.delegate = nil;
@@ -334,7 +342,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     
     NSError *error;
     NSDictionary *message = @{@"content": [self.textView.text copy],
-                              @"groupId": TemporaryGroupId};
+                              @"groupId": self.group.groupId};
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:message options:kNilOptions error:&error];
     NSString *msgString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     [_webSocket send:msgString];

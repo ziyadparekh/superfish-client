@@ -9,6 +9,9 @@
 #import "ComposeTableViewController.h"
 #import "Contacts.h"
 
+#import "ContactsManager.h"
+#import "NewGroupManager.h"
+
 #import <RestKit/RestKit.h>
 
 static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb45e77f9153bf8d4959facacd2db395fb67cbf3a1d5fd6ddc";
@@ -33,11 +36,6 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     
     self.title = @"Create Group";
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self
-                                                                                          action:@selector(actionCancel)];
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self
-                                                                                           action:@selector(actionDone)];
     
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.tableView addGestureRecognizer:gestureRecognizer];
@@ -51,7 +49,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     users = [[NSMutableArray alloc] init];
     selection = [[NSMutableArray alloc] init];
     
-    [self configureRestkit];
+    //[self configureRestkit];
     [self loadPeople];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -102,16 +100,15 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 - (void)loadPeople
 {
-    NSDictionary *queryParams = @{@"token" : TeporaryUserToken};
-    [[RKObjectManager sharedManager] getObjectsAtPath:@"/contacts" parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [[ContactsManager sharedManager] loadUserContacts:^(NSArray *contacts) {
         [users removeAllObjects];
-        for (Contacts *contact in mappingResult.array) {
+        for (Contacts *contact in contacts) {
             [users addObject:contact];
         }
         [self setObjects:users];
         [self.tableView reloadData];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-        NSLog(@"There was an error : %@", error);
+        NSLog(@"There was an error %@", error);
     }];
 }
 
@@ -149,25 +146,29 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 #pragma mark - User actions
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)actionCancel
+- (IBAction)didPressCancelButton:(UIBarButtonItem *)sender
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)actionDone
+- (IBAction)didPressDoneButton:(UIBarButtonItem *)sender
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-    NSLog(@"%@", selection);
     if ([selection count] == 0) { NSLog(@"need to select users"); return; }
+
     NSMutableDictionary *group = [[NSMutableDictionary alloc] initWithObjects:@[@"", selection, TeporaryUserToken] forKeys:@[@"name", @"members", @"token"]];
-    [[RKObjectManager sharedManager] postObject:group path:@"/group" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [[NewGroupManager sharedManager] createNewGroup:group withBlock:^(NSArray *array) {
+        NSLog(@"%@", self.delegate);
+        if (self.delegate != nil){
+            NSLog(@"herere");
+            [self.delegate didCreateGroup:array forController:self];
+        }
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"%@", error);
     }];
-    
 }
 
 #pragma mark - Table view data source
@@ -281,5 +282,4 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
  // Pass the selected object to the new view controller.
  }
  */
-
 @end

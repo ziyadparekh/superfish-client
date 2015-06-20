@@ -8,8 +8,19 @@
 
 #import "SLKTextViewController.h"
 #import "URBMediaFocusViewController.h"
+#import "ZPGroup.h"
+
+@class MessagesViewController;
+
+@protocol MessagesViewControllerDelegate <NSObject>
+
+- (void)didGoBackToGroupViewControllerFrom:(MessagesViewController *)controller;
+
+@end
 
 @interface MessagesViewController : SLKTextViewController <URBMediaFocusViewControllerDelegate>
 
+@property (nonatomic, weak) id<MessagesViewControllerDelegate>delegate;
+@property (strong, nonatomic) ZPGroup *group;
 
 @end

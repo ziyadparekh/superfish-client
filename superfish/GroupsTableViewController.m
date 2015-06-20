@@ -11,6 +11,10 @@
 #import "ZPGroup.h"
 #import "Messages.h"
 #import "Contacts.h"
+#import "ComposeTableViewController.h"
+#import "MessagesViewController.h"
+
+#import "GroupManager.h"
 
 #import <RestKit/RestKit.h>
 
@@ -21,7 +25,8 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
 
 @interface GroupsTableViewController ()
 
-@property (strong, nonatomic) NSArray *groups;
+@property (strong, nonatomic) NSMutableArray *groups;
+@property (strong, nonatomic) ZPGroup *groupForSegue;
 
 @end
 
@@ -36,14 +41,12 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    
-    
     [self.tableView registerClass:[GroupsTableViewCell class] forCellReuseIdentifier:GroupCellIdentifier];
     self.tableView.rowHeight = 72.0;
     [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 30, 0, 0)];
     
     // Configure Restkit
-    [self configureRestkit];
+    //[self configureRestkit];
     [self loadGroups];
 }
 
@@ -72,13 +75,20 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
 }
 
 - (void) loadGroups {
-    NSDictionary *queryParams = @{@"token" : TeporaryUserToken};
-    [[RKObjectManager sharedManager] getObjectsAtPath:@"/groups" parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        self.groups = mappingResult.array;
+    [[GroupManager sharedManager] loadUserGroups:^(NSArray *groups) {
+        self.groups = [groups mutableCopy];
         [self.tableView reloadData];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"There was an error : %@", error);
     }];
+    
+//    NSDictionary *queryParams = @{@"token" : TeporaryUserToken};
+//    [[RKObjectManager sharedManager] getObjectsAtPath:@"/groups" parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+//        self.groups = mappingResult.array;
+//        [self.tableView reloadData];
+//    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+//        NSLog(@"There was an error : %@", error);
+//    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -126,6 +136,28 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
     return group.name;
 }
 
+#pragma mark - ComposeTableView delegate method
+
+- (void)didCreateGroup:(NSArray *)group forController:(ComposeTableViewController *)controller
+{
+    self.groupForSegue = [group firstObject];
+    [self performSegueWithIdentifier:@"GroupToMessages" sender:self];
+}
+
+#pragma mark - MessagesViewController delegate method
+
+- (void)didGoBackToGroupViewControllerFrom:(MessagesViewController *)controller
+{
+    [self loadGroups];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"GroupToMessages" sender:self];
+}
+
+
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -160,14 +192,27 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"GroupToComposeSeugue"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        ComposeTableViewController *destinationViewController = [navigationController viewControllers][0];
+        destinationViewController.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"GroupToMessages"] && self.groupForSegue == nil) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        MessagesViewController *destinationViewController = [segue destinationViewController];
+        destinationViewController.group = [self.groups objectAtIndex:indexPath.row];
+        destinationViewController.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"GroupToMessages"] && self.groupForSegue != nil) {
+        MessagesViewController *destinationViewController = [segue destinationViewController];
+        destinationViewController.group = self.groupForSegue;
+        destinationViewController.delegate = self;
+        self.groupForSegue = nil;
+    }
 }
-*/
 
 @end
