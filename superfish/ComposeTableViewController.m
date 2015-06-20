@@ -30,18 +30,12 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 @implementation ComposeTableViewController
 
 @synthesize viewHeader;
-@synthesize delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.title = @"Create Group";
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self
-                                                                                          action:@selector(actionCancel)];
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self
-                                                                                           action:@selector(actionDone)];
     
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.tableView addGestureRecognizer:gestureRecognizer];
@@ -152,14 +146,14 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 #pragma mark - User actions
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)actionCancel
+- (IBAction)didPressCancelButton:(UIBarButtonItem *)sender
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (void)actionDone
+- (IBAction)didPressDoneButton:(UIBarButtonItem *)sender
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     if ([selection count] == 0) { NSLog(@"need to select users"); return; }
@@ -167,9 +161,9 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     NSMutableDictionary *group = [[NSMutableDictionary alloc] initWithObjects:@[@"", selection, TeporaryUserToken] forKeys:@[@"name", @"members", @"token"]];
     [[NewGroupManager sharedManager] createNewGroup:group withBlock:^(NSArray *array) {
         NSLog(@"%@", self.delegate);
-        if (delegate != nil){
+        if (self.delegate != nil){
             NSLog(@"herere");
-            [delegate didCreateGroup:array];
+            [self.delegate didCreateGroup:array forController:self];
         }
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
@@ -288,5 +282,4 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
  // Pass the selected object to the new view controller.
  }
  */
-
 @end

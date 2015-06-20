@@ -9,14 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "ZPGroup.h"
 
-@protocol ComposeGroupDelegate
+@class ComposeTableViewController;
 
-- (void)didCreateGroup:(NSArray *)group;
+@protocol ComposeGroupDelegate <NSObject>
+
+- (void)didCreateGroup:(NSArray *)group forController:(ComposeTableViewController *)controller;
 
 @end
 
 @interface ComposeTableViewController : UITableViewController
 
-@property (nonatomic, assign) IBOutlet id<ComposeGroupDelegate>delegate;
+@property (nonatomic, weak) id<ComposeGroupDelegate>delegate;
+
+- (IBAction)didPressDoneButton:(UIBarButtonItem *)sender;
+- (IBAction)didPressCancelButton:(UIBarButtonItem *)sender;
 
 @end

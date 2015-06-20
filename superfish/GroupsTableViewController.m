@@ -26,6 +26,7 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
 @interface GroupsTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *groups;
+@property (strong, nonatomic) ZPGroup *groupForSegue;
 
 @end
 
@@ -137,17 +138,25 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
 
 #pragma mark - ComposeTableView delegate method
 
-- (void)didCreateGroup:(NSArray *)group
+- (void)didCreateGroup:(NSArray *)group forController:(ComposeTableViewController *)controller
 {
-    NSLog(@"%@", group);
-    [self.groups insertObject:[group firstObject] atIndex:0];
-    [self.tableView reloadData];
+    self.groupForSegue = [group firstObject];
+    [self performSegueWithIdentifier:@"GroupToMessages" sender:self];
+}
+
+#pragma mark - MessagesViewController delegate method
+
+- (void)didGoBackToGroupViewControllerFrom:(MessagesViewController *)controller
+{
+    [self loadGroups];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"GroupToMessages" sender:self];
 }
+
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -190,13 +199,19 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"GroupToComposeSeugue"]) {
-        ComposeTableViewController *destinationViewController = [segue destinationViewController];
+        UINavigationController *navigationController = segue.destinationViewController;
+        ComposeTableViewController *destinationViewController = [navigationController viewControllers][0];
         destinationViewController.delegate = self;
-    } else if ([segue.identifier isEqualToString:@"GroupToMessages"]) {
+    } else if ([segue.identifier isEqualToString:@"GroupToMessages"] && self.groupForSegue == nil) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         MessagesViewController *destinationViewController = [segue destinationViewController];
-        NSLog(@"%@", [self.groups objectAtIndex:indexPath.row]);
         destinationViewController.group = [self.groups objectAtIndex:indexPath.row];
+        destinationViewController.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"GroupToMessages"] && self.groupForSegue != nil) {
+        MessagesViewController *destinationViewController = [segue destinationViewController];
+        destinationViewController.group = self.groupForSegue;
+        destinationViewController.delegate = self;
+        self.groupForSegue = nil;
     }
 }
 

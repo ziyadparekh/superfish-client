@@ -287,6 +287,13 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
+        if (self.delegate != nil) {
+            NSLog(@"view should call delegate method");
+            [self.delegate didGoBackToGroupViewControllerFrom:self];
+        }
+    }
+    
     [super viewWillDisappear:animated];
     
     _webSocket.delegate = nil;

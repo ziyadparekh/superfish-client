@@ -71,11 +71,22 @@
                             <outlet property="delegate" destination="LQV-QQ-6Fv" id="Zln-rC-kiq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="NAO-n4-FMW"/>
+                    <navigationItem key="navigationItem" id="NAO-n4-FMW">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="BKB-Ap-1Cx">
+                            <connections>
+                                <action selector="didPressCancelButton:" destination="LQV-QQ-6Fv" id="3P9-fV-GNm"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="zPn-Er-NyJ">
+                            <connections>
+                                <action selector="didPressDoneButton:" destination="LQV-QQ-6Fv" id="tme-Hq-RPS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ddD-cW-P1P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2518" y="1960"/>
+            <point key="canvasLocation" x="1621" y="1939"/>
         </scene>
         <!--Groups Table View Controller-->
         <scene sceneID="RQa-IE-ohb">
@@ -104,7 +115,7 @@
                     <navigationItem key="navigationItem" id="3yZ-M0-dxw">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="l21-QJ-0ra">
                             <connections>
-                                <segue destination="LXU-AO-uO6" kind="presentation" identifier="GroupToComposeSeugue" id="j47-lE-efr"/>
+                                <segue destination="hgu-Bi-ELL" kind="presentation" identifier="GroupToComposeSeugue" id="RxD-EA-W6O"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -150,22 +161,22 @@
             <point key="canvasLocation" x="4242" y="384"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="K9N-QL-1vU">
+        <scene sceneID="lxn-ba-DII">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LXU-AO-uO6" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hgu-Bi-ELL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fmF-gV-3ke">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d5I-w6-47h">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="LQV-QQ-6Fv" kind="relationship" relationship="rootViewController" id="E3J-sH-dgd"/>
+                        <segue destination="LQV-QQ-6Fv" kind="relationship" relationship="rootViewController" id="cdk-gF-Ccl"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5rM-hY-570" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gZA-ef-FbC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1620" y="1960"/>
+            <point key="canvasLocation" x="968" y="1944"/>
         </scene>
     </scenes>
 </document>

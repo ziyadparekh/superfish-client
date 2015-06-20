@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ComposeTableViewController.h"
+#import "MessagesViewController.h"
 
-@interface GroupsTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, ComposeGroupDelegate>
+@interface GroupsTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, ComposeGroupDelegate, MessagesViewControllerDelegate>
 
 @end
