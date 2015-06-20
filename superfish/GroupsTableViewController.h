@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ComposeTableViewController.h"
 
-@interface GroupsTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface GroupsTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, ComposeGroupDelegate>
 
 @end

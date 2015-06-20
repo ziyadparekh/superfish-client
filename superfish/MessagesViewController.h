@@ -8,8 +8,10 @@
 
 #import "SLKTextViewController.h"
 #import "URBMediaFocusViewController.h"
+#import "ZPGroup.h"
 
 @interface MessagesViewController : SLKTextViewController <URBMediaFocusViewControllerDelegate>
 
+@property (strong, nonatomic) ZPGroup *group;
 
 @end

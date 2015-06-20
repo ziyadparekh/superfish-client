@@ -18,6 +18,8 @@
 		872265281B1CD24300341003 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 872265271B1CD24300341003 /* Images.xcassets */; };
 		8722652B1B1CD24300341003 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 872265291B1CD24300341003 /* LaunchScreen.xib */; };
 		872265371B1CD24300341003 /* superfishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 872265361B1CD24300341003 /* superfishTests.m */; };
+		87284ED81B331C8700173054 /* NewGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87284ED71B331C8700173054 /* NewGroupManager.m */; };
+		87284EDB1B346A8A00173054 /* MessagesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87284EDA1B346A8A00173054 /* MessagesManager.m */; };
 		879C83AC1B20E5E400818ECF /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83AB1B20E5E400818ECF /* MessagesViewController.m */; };
 		879C83AF1B20E65D00818ECF /* MessagesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83AE1B20E65D00818ECF /* MessagesTableViewCell.m */; };
 		879C83B21B20E68000818ECF /* MessagesTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 879C83B11B20E68000818ECF /* MessagesTextView.m */; };
@@ -28,7 +30,11 @@
 		87D0FFA31B27E4650028E284 /* GroupsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFA21B27E4650028E284 /* GroupsTableViewCell.m */; };
 		87D0FFA71B2CB7D10028E284 /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFA61B2CB7D10028E284 /* ContactsTableViewController.m */; };
 		87D0FFAA1B2CC4F90028E284 /* Contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFA91B2CC4F90028E284 /* Contacts.m */; };
-		87D0FFBB1B2E72D30028E284 /* ComposeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFB91B2E72D30028E284 /* ComposeTableViewController.m */; };
+		87D0FFC01B311CD40028E284 /* ComposeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFBF1B311CD40028E284 /* ComposeTableViewController.m */; };
+		87D0FFC31B311ED30028E284 /* MappingProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFC21B311ED30028E284 /* MappingProvider.m */; };
+		87D0FFC61B311F7E0028E284 /* ZPObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFC51B311F7E0028E284 /* ZPObjectManager.m */; };
+		87D0FFC91B3120D60028E284 /* GroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFC81B3120D60028E284 /* GroupManager.m */; };
+		87D0FFCC1B3316900028E284 /* ContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0FFCB1B3316900028E284 /* ContactsManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +69,10 @@
 		872265301B1CD24300341003 /* superfishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = superfishTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		872265351B1CD24300341003 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		872265361B1CD24300341003 /* superfishTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = superfishTests.m; sourceTree = "<group>"; };
+		87284ED61B331C8700173054 /* NewGroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGroupManager.h; sourceTree = "<group>"; };
+		87284ED71B331C8700173054 /* NewGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGroupManager.m; sourceTree = "<group>"; };
+		87284ED91B346A8A00173054 /* MessagesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesManager.h; sourceTree = "<group>"; };
+		87284EDA1B346A8A00173054 /* MessagesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesManager.m; sourceTree = "<group>"; };
 		879C83AA1B20E5E400818ECF /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
 		879C83AB1B20E5E400818ECF /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
 		879C83AD1B20E65D00818ECF /* MessagesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesTableViewCell.h; sourceTree = "<group>"; };
@@ -85,8 +95,16 @@
 		87D0FFA61B2CB7D10028E284 /* ContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsTableViewController.m; sourceTree = "<group>"; };
 		87D0FFA81B2CC4F90028E284 /* Contacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contacts.h; sourceTree = "<group>"; };
 		87D0FFA91B2CC4F90028E284 /* Contacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contacts.m; sourceTree = "<group>"; };
-		87D0FFB81B2E72D30028E284 /* ComposeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeTableViewController.h; sourceTree = "<group>"; };
-		87D0FFB91B2E72D30028E284 /* ComposeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeTableViewController.m; sourceTree = "<group>"; };
+		87D0FFBE1B311CD40028E284 /* ComposeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeTableViewController.h; sourceTree = "<group>"; };
+		87D0FFBF1B311CD40028E284 /* ComposeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeTableViewController.m; sourceTree = "<group>"; };
+		87D0FFC11B311ED30028E284 /* MappingProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappingProvider.h; sourceTree = "<group>"; };
+		87D0FFC21B311ED30028E284 /* MappingProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappingProvider.m; sourceTree = "<group>"; };
+		87D0FFC41B311F7E0028E284 /* ZPObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPObjectManager.h; sourceTree = "<group>"; };
+		87D0FFC51B311F7E0028E284 /* ZPObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPObjectManager.m; sourceTree = "<group>"; };
+		87D0FFC71B3120D60028E284 /* GroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupManager.h; sourceTree = "<group>"; };
+		87D0FFC81B3120D60028E284 /* GroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupManager.m; sourceTree = "<group>"; };
+		87D0FFCA1B3316900028E284 /* ContactsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsManager.h; sourceTree = "<group>"; };
+		87D0FFCB1B3316900028E284 /* ContactsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +166,7 @@
 		872265161B1CD24300341003 /* superfish */ = {
 			isa = PBXGroup;
 			children = (
+				87D0FFBD1B3118CF0028E284 /* Api */,
 				87D0FFA41B2CB2760028E284 /* Contacts */,
 				879C83BE1B238BB800818ECF /* NIAttributedLabel */,
 				879C83A91B20E5BB00818ECF /* Messages */,
@@ -249,10 +268,29 @@
 		87D0FFB11B2E63780028E284 /* Compose */ = {
 			isa = PBXGroup;
 			children = (
-				87D0FFB81B2E72D30028E284 /* ComposeTableViewController.h */,
-				87D0FFB91B2E72D30028E284 /* ComposeTableViewController.m */,
+				87D0FFBE1B311CD40028E284 /* ComposeTableViewController.h */,
+				87D0FFBF1B311CD40028E284 /* ComposeTableViewController.m */,
 			);
 			name = Compose;
+			sourceTree = "<group>";
+		};
+		87D0FFBD1B3118CF0028E284 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				87D0FFC11B311ED30028E284 /* MappingProvider.h */,
+				87D0FFC21B311ED30028E284 /* MappingProvider.m */,
+				87D0FFC41B311F7E0028E284 /* ZPObjectManager.h */,
+				87D0FFC51B311F7E0028E284 /* ZPObjectManager.m */,
+				87D0FFC71B3120D60028E284 /* GroupManager.h */,
+				87D0FFC81B3120D60028E284 /* GroupManager.m */,
+				87D0FFCA1B3316900028E284 /* ContactsManager.h */,
+				87D0FFCB1B3316900028E284 /* ContactsManager.m */,
+				87284ED61B331C8700173054 /* NewGroupManager.h */,
+				87284ED71B331C8700173054 /* NewGroupManager.m */,
+				87284ED91B346A8A00173054 /* MessagesManager.h */,
+				87284EDA1B346A8A00173054 /* MessagesManager.m */,
+			);
+			name = Api;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,12 +430,15 @@
 			files = (
 				879C83B51B22543400818ECF /* MessagePost.m in Sources */,
 				8722651D1B1CD24300341003 /* AppDelegate.m in Sources */,
-				87D0FFBB1B2E72D30028E284 /* ComposeTableViewController.m in Sources */,
+				87D0FFC01B311CD40028E284 /* ComposeTableViewController.m in Sources */,
+				87D0FFC31B311ED30028E284 /* MappingProvider.m in Sources */,
 				87D0FFA71B2CB7D10028E284 /* ContactsTableViewController.m in Sources */,
 				871FC3D71B1F87A1003F9919 /* Messages.m in Sources */,
 				87D0FFAA1B2CC4F90028E284 /* Contacts.m in Sources */,
 				879C83AC1B20E5E400818ECF /* MessagesViewController.m in Sources */,
+				87D0FFC61B311F7E0028E284 /* ZPObjectManager.m in Sources */,
 				8722651A1B1CD24300341003 /* main.m in Sources */,
+				87284ED81B331C8700173054 /* NewGroupManager.m in Sources */,
 				87D0FFA31B27E4650028E284 /* GroupsTableViewCell.m in Sources */,
 				879C83BC1B2387F100818ECF /* NIAttributedLabel.m in Sources */,
 				879C83BD1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.m in Sources */,
@@ -405,6 +446,9 @@
 				87D0FFA01B27E1A50028E284 /* GroupsTableViewController.m in Sources */,
 				872265201B1CD24300341003 /* superfish.xcdatamodeld in Sources */,
 				879C83AF1B20E65D00818ECF /* MessagesTableViewCell.m in Sources */,
+				87284EDB1B346A8A00173054 /* MessagesManager.m in Sources */,
+				87D0FFCC1B3316900028E284 /* ContactsManager.m in Sources */,
+				87D0FFC91B3120D60028E284 /* GroupManager.m in Sources */,
 				871FC3D11B1F7E01003F9919 /* ZPTableViewController.m in Sources */,
 				879C83B21B20E68000818ECF /* MessagesTextView.m in Sources */,
 			);
