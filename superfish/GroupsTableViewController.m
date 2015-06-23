@@ -21,6 +21,8 @@
 
 
 static NSString *GroupCellIdentifier = @"GroupCell";
+
+static NSString *TemporaryUserId = @"ziyadparekh";
 static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3c494181d910d3c7dc7cbe76e0ad6e1ebba80d404740c4cd7";
 
 @interface GroupsTableViewController ()
@@ -117,8 +119,20 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
     cell.groupNameLabel.text = [self getGroupName:group];
     cell.lastMessageTextLabel.text = [group getLastMessageForGroup:group];
     cell.lastMessageSentDateLabel.text = [group getGroupActivity:group];
-    
+    if (![self hasUserReadLastMessage:[group getReadArrayForGroup:group]]) {
+        cell.lastMessageTextLabel.textColor = [UIColor blueColor];
+    } else {
+        cell.lastMessageTextLabel.textColor = [UIColor lightGrayColor];
+    }
     return cell;
+}
+
+- (BOOL)hasUserReadLastMessage:(NSArray *)array
+{
+    if ([array containsObject:TemporaryUserId]) {
+        return YES;
+    }
+    return NO;
 }
 
 - (NSString *)getGroupName:(ZPGroup *)group

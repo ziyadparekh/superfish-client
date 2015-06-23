@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "superfish/GroupsTableViewController.m"
-            timestampString = "456525650.653703"
+            timestampString = "456621048.411593"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "-didGoBackToGroupViewControllerFrom:"
             landmarkType = "5">
          </BreakpointContent>

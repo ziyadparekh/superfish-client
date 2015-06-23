@@ -18,6 +18,14 @@
     return msg.content;
 }
 
+- (NSArray *)getReadArrayForGroup:(ZPGroup *) group {
+    if ([group.messages count] == 0) {
+        return @[];
+    }
+    Messages *msg = [group.messages objectAtIndex:0];
+    return msg.read;
+}
+
 - (NSString *)getGroupActivity:(ZPGroup *)group {
     NSString *activity = group.activity;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

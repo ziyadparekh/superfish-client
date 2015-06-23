@@ -9,7 +9,6 @@
 #import "MessagesViewController.h"
 #import "MessagesTableViewCell.h"
 #import "MessagesTextView.h"
-#import "MessagePost.h"
 #import "Messages.h"
 #import "MessagesManager.h"
 #import "MappingProvider.h"
@@ -186,6 +185,17 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     }];
 }
 
+- (void)sendReadMessagesSignal
+{
+    NSError *error;
+    NSDictionary *message = @{@"content": @"",
+                              @"type": @"Read",
+                              @"groupId": self.group.groupId};
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:message options:kNilOptions error:&error];
+    NSString *msgString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [_webSocket send:msgString];
+}
+
 - (void)editCellMessage:(UIGestureRecognizer *)gesture
 {
     MessagesTableViewCell *cell = (MessagesTableViewCell *)gesture.view;
@@ -231,6 +241,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 {
     NSLog(@"Websocket Connected");
     [self.rightButton setEnabled:YES];
+    [self sendReadMessagesSignal];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
@@ -287,9 +298,9 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [self sendReadMessagesSignal];
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         if (self.delegate != nil) {
-            NSLog(@"view should call delegate method");
             [self.delegate didGoBackToGroupViewControllerFrom:self];
         }
     }
@@ -342,6 +353,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     
     NSError *error;
     NSDictionary *message = @{@"content": [self.textView.text copy],
+                              @"type": @"Text",
                               @"groupId": self.group.groupId};
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:message options:kNilOptions error:&error];
     NSString *msgString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];

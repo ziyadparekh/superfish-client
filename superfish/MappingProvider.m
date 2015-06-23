@@ -25,7 +25,7 @@
 + (RKObjectMapping *)messagesMapping
 {
     RKObjectMapping *messagesMapping = [RKObjectMapping mappingForClass:[Messages class]];
-    [messagesMapping addAttributeMappingsFromArray:@[@"content", @"time"]];
+    [messagesMapping addAttributeMappingsFromArray:@[@"content", @"time", @"read"]];
     
     return messagesMapping;
 }
@@ -33,7 +33,7 @@
 + (RKObjectMapping *) messagesForGroupMapping
 {
     RKObjectMapping *messagesMapping = [RKObjectMapping mappingForClass:[Messages class]];
-    [messagesMapping addAttributeMappingsFromArray:@[@"sender", @"type", @"content", @"time", @"group"]];
+    [messagesMapping addAttributeMappingsFromArray:@[@"sender", @"type", @"content", @"time", @"group", @"read"]];
     
     return messagesMapping;
 }
