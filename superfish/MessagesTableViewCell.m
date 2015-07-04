@@ -57,6 +57,8 @@
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-trailing-[thumbnailView(thumbSize)]-(>=0)-|" options:0 metrics:metrics views:views]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-15-[titleLabel]-leading-[bodyLabel(>=0)]-leading-[attachmentView(>=0,<=attchSize)]-trailing-|" options:0 metrics:metrics views:views]];
+    
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void) prepareForReuse
@@ -65,7 +67,7 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
+    self.titleLabel.font = [UIFont fontWithName:@"Zapf Dingbats" size:16.0];
     self.bodyLabel.font = [UIFont systemFontOfSize:16.0];
     self.attachmentView.image = nil;
 }
@@ -81,7 +83,7 @@
         _titleLabel.userInteractionEnabled = NO;
         _titleLabel.numberOfLines = 0;
         
-        _titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
+        _titleLabel.font = [UIFont fontWithName:@"Zapf Dingbats" size:16.0];
         _titleLabel.textColor = [UIColor grayColor];
     }
     return _titleLabel;

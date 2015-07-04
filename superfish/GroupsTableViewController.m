@@ -13,6 +13,8 @@
 #import "Contacts.h"
 #import "ComposeTableViewController.h"
 #import "MessagesViewController.h"
+#import "User.h"
+#import "Common.h"
 
 #import "GroupManager.h"
 
@@ -23,7 +25,7 @@
 static NSString *GroupCellIdentifier = @"GroupCell";
 
 static NSString *TemporaryUserId = @"ziyadparekh";
-static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3c494181d910d3c7dc7cbe76e0ad6e1ebba80d404740c4cd7";
+static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb45e77f9153bf8d4959facacd2db395fb67cbf3a1d5fd6ddc";
 
 @interface GroupsTableViewController ()
 
@@ -46,10 +48,24 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
     [self.tableView registerClass:[GroupsTableViewCell class] forCellReuseIdentifier:GroupCellIdentifier];
     self.tableView.rowHeight = 72.0;
     [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 30, 0, 0)];
+    self.title = @"Conversations";
     
     // Configure Restkit
     //[self configureRestkit];
-    [self loadGroups];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSLog(@"gorup view loaded");
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    User *currentUser = [userDefaults objectForKey:@"currentUser"];
+    if (currentUser == nil) {
+        [self performSegueWithIdentifier:@"GroupToHomeSegue" sender:self];
+    } else {
+        [self loadGroups];
+    }
 }
 
 - (void) configureRestkit {
@@ -120,7 +136,7 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
     cell.lastMessageTextLabel.text = [group getLastMessageForGroup:group];
     cell.lastMessageSentDateLabel.text = [group getGroupActivity:group];
     if (![self hasUserReadLastMessage:[group getReadArrayForGroup:group]]) {
-        cell.lastMessageTextLabel.textColor = [UIColor blueColor];
+        cell.lastMessageTextLabel.textColor = [UIColor colorWithRed:32.0/255 green:206.0/255 blue:153.0/255 alpha:1.0];
     } else {
         cell.lastMessageTextLabel.textColor = [UIColor lightGrayColor];
     }

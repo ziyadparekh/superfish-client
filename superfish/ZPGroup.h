@@ -23,5 +23,6 @@
 - (NSString *)getLastMessageForGroup:(ZPGroup *) group;
 - (NSString *)getGroupActivity:(ZPGroup *)group;
 - (NSArray *)getReadArrayForGroup:(ZPGroup *)group;
+- (NSString *)getGroupName:(ZPGroup *)group;
 
 @end

@@ -11,10 +11,15 @@
 
 @interface MappingProvider : NSObject
 
++ (RKObjectMapping *)userLoginMapping;
++ (RKObjectMapping *)userMapping;
++ (RKObjectMapping *)newUserMapping;
 + (RKObjectMapping *)groupMapping;
 + (RKObjectMapping *)contactMapping;
 + (RKObjectMapping *)messagesMapping;
 + (RKObjectMapping *)newGroupMapping;
 + (RKObjectMapping *)messagesForGroupMapping;
++ (RKObjectMapping *)editGroupNameMapping;
++ (RKObjectMapping *)editGroupMembersMapping;
 
 @end

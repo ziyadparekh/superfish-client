@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C06638FEE54B3B47FA3E75B8"
+               BlueprintIdentifier = "257A33594D381893F629570A"
                BuildableName = "libPods-URBMediaFocusViewController.a"
                BlueprintName = "Pods-URBMediaFocusViewController"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -6,3 +6,5 @@ pod 'SlackTextViewController'
 pod "AYVibrantButton"
 pod 'SDWebImage', '~>3.7'
 pod "URBMediaFocusViewController"
+pod 'FontAwesomeKit', '~> 2.1.0'
+pod 'libPhoneNumber-iOS', '~> 0.8'

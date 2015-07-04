@@ -19,9 +19,15 @@
 
 @interface ComposeTableViewController : UITableViewController
 
+@property (strong, nonatomic) NSMutableArray *users;
+@property (strong, nonatomic) NSMutableArray *sections;
+@property (strong, nonatomic) NSMutableArray *selection;
+
 @property (nonatomic, weak) id<ComposeGroupDelegate>delegate;
 
 - (IBAction)didPressDoneButton:(UIBarButtonItem *)sender;
 - (IBAction)didPressCancelButton:(UIBarButtonItem *)sender;
+
+- (void)setObjects:(NSArray *)objects;
 
 @end

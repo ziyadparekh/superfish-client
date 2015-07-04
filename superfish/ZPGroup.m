@@ -35,4 +35,19 @@
     return [date formattedAsTimeAgo];
 }
 
+- (NSString *)getGroupName:(ZPGroup *)group
+{
+    if (group.members.count == 1) {
+        return @"Botler";
+    }
+    if (group.name.length == 0) {
+        NSMutableArray *usernames = [[NSMutableArray alloc] initWithCapacity:[group.members count]];
+        for (NSDictionary *user in group.members) {
+            [usernames addObject:user[@"username"]];
+        }
+        return [usernames componentsJoinedByString:@", "];
+    }
+    return group.name;
+}
+
 @end
