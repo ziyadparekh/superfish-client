@@ -25,7 +25,6 @@ static GroupNameManager *sharedManager = nil;
 - (void)updateGroupName:(NSMutableDictionary *)group withBlock:(void (^)(NSArray *array))success failure:(void (^)(RKObjectRequestOperation *operation, NSError *error))failure
 {
     NSString *path = [NSString stringWithFormat:@"/group/%@/name", group[@"groupId"]];
-    NSLog(@"%@", group);
     [self putObject:group path:path parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         if (success) {
             NSLog(@"success");

@@ -37,13 +37,18 @@
 
 - (NSString *)getGroupName:(ZPGroup *)group
 {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.currentUser = [userDefaults objectForKey:@"currentUser"];
+    
     if (group.members.count == 1) {
         return @"Botler";
     }
     if (group.name.length == 0) {
-        NSMutableArray *usernames = [[NSMutableArray alloc] initWithCapacity:[group.members count]];
+        NSMutableArray *usernames = [[NSMutableArray alloc] initWithCapacity:(group.members.count -1)];
         for (NSDictionary *user in group.members) {
-            [usernames addObject:user[@"username"]];
+            if (![user[@"username"] isEqualToString:self.currentUser[@"username"]]) {
+                [usernames addObject:user[@"username"]];
+            }
         }
         return [usernames componentsJoinedByString:@", "];
     }

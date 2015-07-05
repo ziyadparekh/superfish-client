@@ -36,8 +36,16 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.memberUsernames = [self buildGroupMembersUsernameArray];
     
+    self.currentUser = [self getCurrentUser];
+    
     //self.tableView.separatorColor = [UIColor colorWithRed:177/255 green:191/255 blue:196/255 alpha:1.0];
-    self.tableView.separatorColor = [UIColor greenColor];
+    //self.tableView.separatorColor = [UIColor greenColor];
+}
+
+- (NSDictionary *)getCurrentUser
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:@"currentUser"];
 }
 
 - (void)dismissKeyboard
@@ -66,6 +74,11 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -73,7 +86,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     if (newGroupName.length == 0 || [newGroupName isEqualToString:self.group.name]) {
         return YES;
     }
-    NSMutableDictionary *payload = [[NSMutableDictionary alloc] initWithObjects:@[newGroupName, self.group.groupId, TeporaryUserToken] forKeys:@[@"name", @"groupId", @"token"]];
+    NSMutableDictionary *payload = [[NSMutableDictionary alloc] initWithObjects:@[newGroupName, self.group.groupId, self.currentUser[@"token"]] forKeys:@[@"name", @"groupId", @"token"]];
     
     [[GroupNameManager sharedManager] updateGroupName:payload withBlock:^(NSArray *array) {
         if (delegate != nil) [delegate didUpdateGroupName:newGroupName];
@@ -87,9 +100,9 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     if ([indexPath section] == 0) {
-        UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(110, 10, 185, 30)];
+        UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, 10, 285, 40)];
         playerTextField.adjustsFontSizeToFitWidth = YES;
-        playerTextField.textColor = [UIColor blackColor];
+        playerTextField.textColor = [UIColor colorWithRed:177/255 green:191/255 blue:196/255 alpha:1.0];
         playerTextField.font = [UIFont fontWithName:@"Zapf Dingbats" size:18.0];
         if ([indexPath row] == 0) {
             playerTextField.placeholder = [self.group getGroupName:self.group];
@@ -101,13 +114,14 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
         playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
         playerTextField.tag = 0;
         playerTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        playerTextField.textAlignment = NSTextAlignmentCenter;
         playerTextField.delegate = self;
         
+        cell.contentView.autoresizingMask = UIViewContentModeScaleAspectFit;
         [cell.contentView addSubview:playerTextField];
     } else if ([indexPath section] == 1) {
         NSString *username = [self.memberUsernames objectAtIndex:indexPath.row];
         cell.textLabel.text = username;
-        NSLog(@"%@", self.group.admin);
         if ([self.group.admin isEqualToString:username]) {
             cell.detailTextLabel.text = @"Admin";
         } else {
@@ -190,7 +204,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
         EditGroupMembersTableViewController *destinationVC = [navigationController viewControllers][0];
         destinationVC.members = [self.memberUsernames mutableCopy];
         destinationVC.group = self.group;
-        destinationVC.delegate = self;
+        destinationVC.editGroupdelegate = self;
     }
 }
 

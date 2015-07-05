@@ -373,11 +373,22 @@
                             <outlet property="delegate" destination="68w-fV-Vig" id="vbS-Tn-z2L"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="x2l-M5-ib0"/>
+                    <navigationItem key="navigationItem" id="x2l-M5-ib0">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="x8p-9B-AJt">
+                            <connections>
+                                <action selector="didPressCancelButton:" destination="68w-fV-Vig" id="JTj-3a-mGg"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="0Fz-e7-Nag">
+                            <connections>
+                                <action selector="didPressRefreshButton:" destination="68w-fV-Vig" id="A5q-Yq-PWo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJx-B8-OWR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6678" y="384"/>
+            <point key="canvasLocation" x="1056" y="438"/>
         </scene>
         <!--Compose Table View Controller-->
         <scene sceneID="CzD-vP-cKn">
@@ -442,6 +453,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="3yZ-M0-dxw">
+                        <barButtonItem key="leftBarButtonItem" id="E0s-ej-aLl">
+                            <connections>
+                                <segue destination="Lj3-HM-jpB" kind="presentation" id="8a1-Fh-aK8"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="l21-QJ-0ra">
                             <connections>
                                 <segue destination="hgu-Bi-ELL" kind="presentation" identifier="GroupToComposeSeugue" id="RxD-EA-W6O"/>
@@ -490,7 +506,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lnc-La-6FL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5866" y="384"/>
+            <point key="canvasLocation" x="244" y="438"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lxn-ba-DII">

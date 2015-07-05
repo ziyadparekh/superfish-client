@@ -13,7 +13,9 @@
 #import "Contacts.h"
 #import "ComposeTableViewController.h"
 #import "MessagesViewController.h"
-#import "User.h"
+
+#import <FontAwesomeKit/FontAwesomeKit.h>
+
 #import "Common.h"
 
 #import "GroupManager.h"
@@ -45,23 +47,25 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    FAKFontAwesome *icon = [FAKFontAwesome userIconWithSize:25];
+    [icon addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor]];
+    
+    [self.navigationItem.leftBarButtonItem setImage:[icon imageWithSize:CGSizeMake(25, 25)]];
+    
     [self.tableView registerClass:[GroupsTableViewCell class] forCellReuseIdentifier:GroupCellIdentifier];
     self.tableView.rowHeight = 72.0;
     [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 30, 0, 0)];
     self.title = @"Conversations";
     
-    // Configure Restkit
-    //[self configureRestkit];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    NSLog(@"gorup view loaded");
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    User *currentUser = [userDefaults objectForKey:@"currentUser"];
-    if (currentUser == nil) {
+    self.currentUser = [userDefaults objectForKey:@"currentUser"];
+    if (self.currentUser == nil) {
         [self performSegueWithIdentifier:@"GroupToHomeSegue" sender:self];
     } else {
         [self loadGroups];
@@ -99,14 +103,6 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"There was an error : %@", error);
     }];
-    
-//    NSDictionary *queryParams = @{@"token" : TeporaryUserToken};
-//    [[RKObjectManager sharedManager] getObjectsAtPath:@"/groups" parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-//        self.groups = mappingResult.array;
-//        [self.tableView reloadData];
-//    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-//        NSLog(@"There was an error : %@", error);
-//    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -145,7 +141,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 - (BOOL)hasUserReadLastMessage:(NSArray *)array
 {
-    if ([array containsObject:TemporaryUserId]) {
+    if ([array containsObject:self.currentUser[@"username"]]) {
         return YES;
     }
     return NO;
@@ -157,9 +153,11 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
         return @"Botler";
     }
     if (group.name.length == 0) {
-        NSMutableArray *usernames = [[NSMutableArray alloc] initWithCapacity:[group.members count]];
+        NSMutableArray *usernames = [[NSMutableArray alloc] initWithCapacity:(group.members.count -1)];
         for (NSDictionary *user in group.members) {
-            [usernames addObject:user[@"username"]];
+            if (![user[@"username"] isEqualToString:self.currentUser[@"username"]]) {
+                [usernames addObject:user[@"username"]];
+            }
         }
         return [usernames componentsJoinedByString:@", "];
     }

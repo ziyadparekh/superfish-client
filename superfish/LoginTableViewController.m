@@ -136,6 +136,7 @@
     return @{
         @"username": user.username,
         @"token": user.token,
+        @"avatar": user.avatar
     };
 }
 

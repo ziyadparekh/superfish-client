@@ -20,6 +20,8 @@
 
 @property (strong, nonatomic) ZPGroup *group;
 @property (strong, nonatomic) NSArray *memberUsernames;
+@property (strong, nonatomic) NSDictionary *currentUser;
+
 @property (nonatomic, assign) IBOutlet id<GroupDetailsDelegate>delegate;
 
 @end

@@ -13,6 +13,7 @@
 #import "MessagesManager.h"
 #import "MappingProvider.h"
 #import "GroupDetailsTableViewController.h"
+#import "Helpers.h"
 
 
 #import "SRWebSocket.h"
@@ -128,6 +129,10 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:32.0/255 green:206.0/255 blue:153.0/255 alpha:1.0];;
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.currentUser = [userDefaults objectForKey:@"currentUser"];
+    
+    self.tableView.tableHeaderView = [self getLoadMoreViewForTableHeader];
     
     [self loadMessages];
     
@@ -162,7 +167,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 - (FAKFontAwesome *)formatIconsWithCode:(NSString *)code
 {
-    NSString *key = [[self allIcons] objectForKey:code];
+    NSString *key = [[Helpers allIcons] objectForKey:code];
     FAKFontAwesome *icon = [FAKFontAwesome iconWithCode:key size:9];
     return icon;
 }
@@ -229,8 +234,8 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     [[MessagesManager sharedManager] loadGroupMessagesForGroup:self.group.groupId withOffset:self.offset withBlock:^(NSArray *messages) {
         NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,[messages count])];
         [self.messages insertObjects:[[messages reverseObjectEnumerator] allObjects] atIndexes:indexes];
-        if (self.messages.count == 20) {
-            self.tableView.tableHeaderView = [self getLoadMoreViewForTableHeader];
+        if (messages.count < 20) {
+            self.tableView.tableHeaderView = nil;
         }
         [self.tableView reloadData];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
@@ -281,7 +286,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     _webSocket.delegate = nil;
     [_webSocket close];
     
-    NSString *formattedUrl = [NSString stringWithFormat:@"ws://localhost:8080/ws/%@?token=%@", self.group.groupId, TeporaryUserToken];
+    NSString *formattedUrl = [NSString stringWithFormat:@"ws://localhost:8080/ws/%@?token=%@", self.group.groupId, self.currentUser[@"token"]];
     NSURL *websocketUrl = [NSURL URLWithString:formattedUrl];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:websocketUrl];
     _webSocket = [[SRWebSocket alloc] initWithURLRequest:urlRequest];
@@ -317,6 +322,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     newMessage.time = [msg valueForKey:@"time"];
     newMessage.type = [msg valueForKey:@"type"];
     newMessage.sender = [msg valueForKey:@"sender"];
+    newMessage.avatar = [msg valueForKey:@"avatar"];
 
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.messages.count inSection:0];
 
@@ -407,7 +413,9 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     NSError *error;
     NSDictionary *message = @{@"content": [self.textView.text copy],
                               @"type": @"Text",
+                              @"avatar": self.currentUser[@"avatar"],
                               @"groupId": self.group.groupId};
+    
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:message options:kNilOptions error:&error];
     NSString *msgString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     [_webSocket send:msgString];
@@ -552,6 +560,10 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     
     cell.titleLabel.text = message.sender;
     cell.bodyLabel.text = message.content;
+    
+    [cell.thumbnailView sd_setImageWithURL:[NSURL URLWithString:message.avatar]];
+    cell.thumbnailView.layer.shouldRasterize = YES;
+    cell.thumbnailView.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
     cell.indexPath = indexPath;
     cell.usedForMessage = YES;

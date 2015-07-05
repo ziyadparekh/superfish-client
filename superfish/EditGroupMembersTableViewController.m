@@ -24,6 +24,13 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     
     self.title = @"Edit Members";
     // Do any additional setup after loading the view.
+    self.currentUser = [self getCurrentUser];
+}
+
+- (NSDictionary *)getCurrentUser
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:@"currentUser"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,11 +106,11 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     
     if ([self.members count] == 0) { NSLog(@"need to select users"); return; }
     
-    NSMutableDictionary *group = [[NSMutableDictionary alloc] initWithObjects:@[self.group.groupId, self.members, TeporaryUserToken] forKeys:@[@"groupId", @"members", @"token"]];
+    NSMutableDictionary *group = [[NSMutableDictionary alloc] initWithObjects:@[self.group.groupId, self.members, self.currentUser[@"token"]] forKeys:@[@"groupId", @"members", @"token"]];
     
     [[GroupMembersManager sharedManager] updateGroupMembers:group withBlock:^(NSArray *array) {
-        if (self.delegate != nil) {
-            [self.delegate didEditGroupMembers:self.members];
+        if (self.editGroupdelegate != nil) {
+            [self.editGroupdelegate didEditGroupMembers:self.members];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {

@@ -25,7 +25,7 @@
 + (RKObjectMapping *)userMapping
 {
     RKObjectMapping *userMapping = [RKObjectMapping mappingForClass:[User class]];
-    [userMapping addAttributeMappingsFromArray:@[@"username", @"number", @"token"]];
+    [userMapping addAttributeMappingsFromArray:@[@"username", @"number", @"token", @"avatar"]];
     
     return userMapping;
 }
@@ -74,7 +74,7 @@
 + (RKObjectMapping *) messagesForGroupMapping
 {
     RKObjectMapping *messagesMapping = [RKObjectMapping mappingForClass:[Messages class]];
-    [messagesMapping addAttributeMappingsFromArray:@[@"sender", @"type", @"content", @"time", @"group", @"read"]];
+    [messagesMapping addAttributeMappingsFromArray:@[@"sender", @"type", @"content", @"time", @"group", @"read", @"avatar"]];
     
     return messagesMapping;
 }
@@ -84,6 +84,14 @@
     // setup object mappings
     RKObjectMapping *contactsMapping = [RKObjectMapping mappingForClass:[Contacts class]];
     [contactsMapping addAttributeMappingsFromArray:@[@"username", @"number", @"id"]];
+    
+    return contactsMapping;
+}
+
++ (RKObjectMapping *)postContactsMapping
+{
+    RKObjectMapping *contactsMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    [contactsMapping addAttributeMappingsFromArray:@[@"contacts"]];
     
     return contactsMapping;
 }

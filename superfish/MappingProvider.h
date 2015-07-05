@@ -16,6 +16,7 @@
 + (RKObjectMapping *)newUserMapping;
 + (RKObjectMapping *)groupMapping;
 + (RKObjectMapping *)contactMapping;
++ (RKObjectMapping *)postContactsMapping;
 + (RKObjectMapping *)messagesMapping;
 + (RKObjectMapping *)newGroupMapping;
 + (RKObjectMapping *)messagesForGroupMapping;

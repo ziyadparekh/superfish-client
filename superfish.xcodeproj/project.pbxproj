@@ -19,6 +19,9 @@
 		871FB3FB1B4749DB00AEFE09 /* LoginTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB3FA1B4749DB00AEFE09 /* LoginTableViewController.m */; };
 		871FB3FE1B4751BB00AEFE09 /* LoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB3FD1B4751BB00AEFE09 /* LoginManager.m */; };
 		871FB4011B475D4000AEFE09 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB4001B475D4000AEFE09 /* HomeViewController.m */; };
+		871FB4041B48B30600AEFE09 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB4031B48B30600AEFE09 /* Helpers.m */; };
+		871FB4061B48B70900AEFE09 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871FB4051B48B70900AEFE09 /* CoreText.framework */; };
+		871FB4081B48B71000AEFE09 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871FB4071B48B71000AEFE09 /* CoreGraphics.framework */; };
 		871FC3D11B1F7E01003F9919 /* ZPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D01B1F7E01003F9919 /* ZPTableViewController.m */; };
 		871FC3D41B1F7EB3003F9919 /* ZPGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D31B1F7EB3003F9919 /* ZPGroup.m */; };
 		871FC3D71B1F87A1003F9919 /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D61B1F87A1003F9919 /* Messages.m */; };
@@ -84,6 +87,10 @@
 		871FB3FD1B4751BB00AEFE09 /* LoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginManager.m; sourceTree = "<group>"; };
 		871FB3FF1B475D4000AEFE09 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		871FB4001B475D4000AEFE09 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		871FB4021B48B30600AEFE09 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
+		871FB4031B48B30600AEFE09 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
+		871FB4051B48B70900AEFE09 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		871FB4071B48B71000AEFE09 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		871FC3CF1B1F7E01003F9919 /* ZPTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPTableViewController.h; sourceTree = "<group>"; };
 		871FC3D01B1F7E01003F9919 /* ZPTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPTableViewController.m; sourceTree = "<group>"; };
 		871FC3D21B1F7EB3003F9919 /* ZPGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPGroup.h; sourceTree = "<group>"; };
@@ -145,6 +152,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				871FB4081B48B71000AEFE09 /* CoreGraphics.framework in Frameworks */,
+				871FB4061B48B70900AEFE09 /* CoreText.framework in Frameworks */,
 				796C3B2CCC6E8649D2BD9DA2 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,6 +180,8 @@
 		66D97280076E8B9FD0798496 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				871FB4071B48B71000AEFE09 /* CoreGraphics.framework */,
+				871FB4051B48B70900AEFE09 /* CoreText.framework */,
 				1FA14FDB5A0712DD3E3B8CB8 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -215,6 +226,8 @@
 			children = (
 				871FB3F21B473FC900AEFE09 /* Common.m */,
 				871FB3F61B473FE500AEFE09 /* Common.h */,
+				871FB4021B48B30600AEFE09 /* Helpers.h */,
+				871FB4031B48B30600AEFE09 /* Helpers.m */,
 			);
 			name = General;
 			sourceTree = "<group>";
@@ -547,6 +560,7 @@
 				871FB3E81B472F6500AEFE09 /* User.m in Sources */,
 				87D0FFCC1B3316900028E284 /* ContactsManager.m in Sources */,
 				87D0FFC91B3120D60028E284 /* GroupManager.m in Sources */,
+				871FB4041B48B30600AEFE09 /* Helpers.m in Sources */,
 				871FC3D11B1F7E01003F9919 /* ZPTableViewController.m in Sources */,
 				879C83B21B20E68000818ECF /* MessagesTextView.m in Sources */,
 			);

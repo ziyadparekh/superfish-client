@@ -23,4 +23,6 @@
 @property (nonatomic, weak) id<MessagesViewControllerDelegate>delegate;
 @property (strong, nonatomic) ZPGroup *group;
 
+@property (strong, nonatomic) NSDictionary *currentUser;
+
 @end

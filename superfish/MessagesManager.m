@@ -26,7 +26,9 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 - (void)loadGroupMessagesForGroup:(NSString *)groupId withOffset:(int)offset withBlock:(void (^)(NSArray *))success failure:(void (^)(RKObjectRequestOperation *, NSError *))failure
 {
-    NSDictionary *queryParams = @{@"token": TeporaryUserToken,
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *currentUser = [userDefaults objectForKey:@"currentUser"];
+    NSDictionary *queryParams = @{@"token": currentUser[@"token"],
                                   @"limit": @20,
                                   @"offset": [NSNumber numberWithInt:offset]};
     

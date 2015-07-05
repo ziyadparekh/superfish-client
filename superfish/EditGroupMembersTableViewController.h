@@ -13,7 +13,7 @@
 
 @protocol EditGroupMembersDelegate <NSObject>
 
-- (void)didEditGroupMembers:(NSArray *)members;;
+- (void)didEditGroupMembers:(NSArray *)members;
 
 @end
 
@@ -21,8 +21,9 @@
 
 @property (strong, nonatomic) NSMutableArray *members;
 @property (strong, nonatomic) ZPGroup *group;
+@property (strong, nonatomic) NSDictionary *currentUser;
 
-@property (nonatomic, weak) id<EditGroupMembersDelegate>delegate;
+@property (nonatomic, weak) id<EditGroupMembersDelegate>editGroupdelegate;
 
 - (IBAction)didPressCancelButton:(UIBarButtonItem *)sender;
 - (IBAction)didPressDoneButton:(UIBarButtonItem *)sender;

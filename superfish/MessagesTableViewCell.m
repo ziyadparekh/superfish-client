@@ -95,7 +95,7 @@
         _bodyLabel = [NIAttributedLabel new];
         _bodyLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _bodyLabel.backgroundColor = [UIColor clearColor];
-        _bodyLabel.userInteractionEnabled = NO;
+        _bodyLabel.userInteractionEnabled = YES;
         _bodyLabel.numberOfLines = 0;
         _bodyLabel.autoDetectLinks = YES;
         _bodyLabel.deferLinkDetection = YES;

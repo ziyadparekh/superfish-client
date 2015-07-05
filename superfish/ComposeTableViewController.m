@@ -155,8 +155,11 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
     if ([self.selection count] == 0) { NSLog(@"need to select users"); return; }
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *currentUser = [userDefaults objectForKey:@"currentUser"];
 
-    NSMutableDictionary *group = [[NSMutableDictionary alloc] initWithObjects:@[@"", self.selection, TeporaryUserToken] forKeys:@[@"name", @"members", @"token"]];
+    NSMutableDictionary *group = [[NSMutableDictionary alloc] initWithObjects:@[@"", self.selection, currentUser[@"token"]] forKeys:@[@"name", @"members", @"token"]];
     [[NewGroupManager sharedManager] createNewGroup:group withBlock:^(NSArray *array) {
         if (self.delegate != nil){
             [self.delegate didCreateGroup:array forController:self];
