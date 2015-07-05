@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-FontAwesomeKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ISO8601DateFormatterValueTransformer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -64,6 +69,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-libPhoneNumber-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,67 +82,77 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>03E20036D82E4E284DE3E972</key>
+		<key>257A33594D381893F629570A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>786E66BF395AAB3FE7B20E59</key>
+		<key>2B2D5A60080DDD35BBB2EDB9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>79B89DA3AE3F611CA40EE7C2</key>
+		<key>4DDA0384C33733B95C5D9FED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8612E2A09B8FB2A3D1CB9F2A</key>
+		<key>802EEE20129F1089B7D9303D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9010FED8C17A10340C6D7B1B</key>
+		<key>8937F6F6EC98CA8B984DD3DB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>98D4B470CAAA1E24F003DBA6</key>
+		<key>8C276604BF2D07BF9D8C5956</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B8B68C6BEC652EBF8A1C0E9A</key>
+		<key>9AF4FB0C2632189D2832F8D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C06638FEE54B3B47FA3E75B8</key>
+		<key>A7A382D660796108A3BCA98A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C3876F869E0A5848202EED02</key>
+		<key>B44391899A4ABA628BD10874</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E53BB756BA54CEE89A686D49</key>
+		<key>C8C828686BF2872F689E8639</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ED28512C9AE713DC03269201</key>
+		<key>CA612A3C791F96683C9A985D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EFBEDA3074AE34579F1E2B01</key>
+		<key>DA8C2A84755C7B9C017324EF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FE280D362F485BAC7F557F5C</key>
+		<key>E8B747BE40F9F1DD3F1632DA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EF4DB5B724C0F09BDC12B2C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F3B09F188138A4D94113F0E1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

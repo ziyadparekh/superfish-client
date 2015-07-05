@@ -12,4 +12,6 @@
 
 @interface GroupsTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, ComposeGroupDelegate, MessagesViewControllerDelegate>
 
+@property (strong, nonatomic) NSDictionary *currentUser;
+
 @end

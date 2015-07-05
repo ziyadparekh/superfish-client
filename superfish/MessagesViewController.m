@@ -9,10 +9,11 @@
 #import "MessagesViewController.h"
 #import "MessagesTableViewCell.h"
 #import "MessagesTextView.h"
-#import "MessagePost.h"
 #import "Messages.h"
 #import "MessagesManager.h"
 #import "MappingProvider.h"
+#import "GroupDetailsTableViewController.h"
+#import "Helpers.h"
 
 
 #import "SRWebSocket.h"
@@ -20,6 +21,7 @@
 #import "UIImageView+WebCache.h"
 #import "URBMediaFocusViewController.h"
 #import "AYVibrantButton.h"
+#import <FontAwesomeKit/FontAwesomeKit.h>
 
 static NSString *MessengerCellIdentifier = @"MessengerCell";
 static NSString *AutoCompletionCellIdentifier = @"AutoCompletionCell";
@@ -29,12 +31,14 @@ static NSString *REGEX_GIF = @"(https?:\/\/.*\.(?:gif))";
 static NSString *TemporaryGroupId = @"557fb60a3c5d63b6ab000001";
 static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb45e77f9153bf8d4959facacd2db395fb67cbf3a1d5fd6ddc";
 
-@interface MessagesViewController () <SRWebSocketDelegate>
+@interface MessagesViewController () <SRWebSocketDelegate, GroupDetailsDelegate>
 
 @property (strong, nonatomic) NSMutableArray *messages;
 
 @property (strong, nonatomic) NSArray *users;
 @property (strong, nonatomic) NSArray *emojis;
+@property (strong, nonatomic) NSArray *colorArray;
+@property (nonatomic, strong) NSArray *searchResult;
 @property (nonatomic) int offset;
 
 @property (nonatomic, strong) URBMediaFocusViewController *mediaFocusController;
@@ -97,27 +101,77 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     
     [self.rightButton setTitle:NSLocalizedString(@"Send", nil) forState:UIControlStateNormal];
     [self.textInputbar.editorTitle setTextColor:[UIColor darkGrayColor]];
-    [self.textInputbar.editortLeftButton setTintColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0]];
-    [self.textInputbar.editortRightButton setTintColor:[UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0]];
+    [self.textInputbar.editortLeftButton setTintColor:[UIColor colorWithRed:32.0/255 green:206.0/255 blue:153.0/255 alpha:1.0]];
+    [self.textInputbar.editortRightButton setTintColor:[UIColor colorWithRed:32.0/255 green:206.0/255 blue:153.0/255 alpha:1.0]];
     
     self.textInputbar.autoHideRightButton = YES;
     self.textInputbar.maxCharCount = 256;
     self.textInputbar.counterStyle = SLKCounterStyleSplit;
-    
-    self.tableView.tableHeaderView = [self getLoadMoreViewForTableHeader];
     
     self.typingIndicatorView.canResignByTouch = YES;
     
     self.mediaFocusController = [[URBMediaFocusViewController alloc] init];
     self.mediaFocusController.delegate = self;
     
-    [self.autoCompletionView registerClass:[MessagesTableViewCell class] forCellReuseIdentifier:AutoCompletionCellIdentifier];
-    [self registerPrefixesForAutoCompletion:@[@"/"]];
+    self.emojis = @[@"image", @"animate", @"map", @"google", @"stock"];
+    self.colorArray = @[@"brownColor", @"redColor", @"blueColor", @"yellowColor", @"greenColor"];
     
-    //[self configureRestkit];
+    [self.autoCompletionView registerClass:[MessagesTableViewCell class] forCellReuseIdentifier:AutoCompletionCellIdentifier];
+    [self registerPrefixesForAutoCompletion:@[@":"]];
+    
+    self.title = [self.group getGroupName:self.group];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIFont fontWithName:@"Zapf Dingbats" size:21], NSFontAttributeName, nil]];
+    
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:32.0/255 green:206.0/255 blue:153.0/255 alpha:1.0];;
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.currentUser = [userDefaults objectForKey:@"currentUser"];
+    
+    self.tableView.tableHeaderView = [self getLoadMoreViewForTableHeader];
+    
     [self loadMessages];
     
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (self.messages.count > 0) {
+        unsigned long lastRow = self.messages.count - 1;
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRow inSection:0];
+        [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    }
+}
+
+- (void)showGroupDetails
+{
+    NSLog(@"%@", self.group);
+    
+}
+
+- (NSDictionary *)allIcons
+{
+    return @{
+        @"image" : @"\uf083",
+        @"animate": @"\uf03d",
+        @"map" : @"\uf041",
+        @"google" : @"\uf1a0",
+        @"stock": @"\uf0d6"
+    };
+}
+
+- (FAKFontAwesome *)formatIconsWithCode:(NSString *)code
+{
+    NSString *key = [[Helpers allIcons] objectForKey:code];
+    FAKFontAwesome *icon = [FAKFontAwesome iconWithCode:key size:9];
+    return icon;
+}
+
 
 - (UIView *)getLoadMoreViewForTableHeader
 {
@@ -126,8 +180,8 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     AYVibrantButton *button = [[AYVibrantButton alloc] initWithFrame:CGRectMake(0, 0, 320, 40) style:AYVibrantButtonStyleTranslucent];
     button.vibrancyEffect = nil;
     button.text = @"Load More";
-    button.font = [UIFont boldSystemFontOfSize:18.0];
-    button.backgroundColor = [UIColor blueColor];
+    button.font = [UIFont fontWithName:@"Zapf Dingbats" size:18.0];
+    button.backgroundColor = [UIColor colorWithRed:32.0/255 green:206.0/255 blue:153.0/255 alpha:1.0];
     button.borderWidth = 1.0;
     [button addGestureRecognizer:[self getTapGestureRecognizer]];
     [button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin];
@@ -180,10 +234,24 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     [[MessagesManager sharedManager] loadGroupMessagesForGroup:self.group.groupId withOffset:self.offset withBlock:^(NSArray *messages) {
         NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,[messages count])];
         [self.messages insertObjects:[[messages reverseObjectEnumerator] allObjects] atIndexes:indexes];
+        if (messages.count < 20) {
+            self.tableView.tableHeaderView = nil;
+        }
         [self.tableView reloadData];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"There was an error : %@", error);
     }];
+}
+
+- (void)sendReadMessagesSignal
+{
+    NSError *error;
+    NSDictionary *message = @{@"content": @"",
+                              @"type": @"Read",
+                              @"groupId": self.group.groupId};
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:message options:kNilOptions error:&error];
+    NSString *msgString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [_webSocket send:msgString];
 }
 
 - (void)editCellMessage:(UIGestureRecognizer *)gesture
@@ -218,7 +286,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     _webSocket.delegate = nil;
     [_webSocket close];
     
-    NSString *formattedUrl = [NSString stringWithFormat:@"ws://localhost:8080/ws/%@?token=%@", self.group.groupId, TeporaryUserToken];
+    NSString *formattedUrl = [NSString stringWithFormat:@"ws://localhost:8080/ws/%@?token=%@", self.group.groupId, self.currentUser[@"token"]];
     NSURL *websocketUrl = [NSURL URLWithString:formattedUrl];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:websocketUrl];
     _webSocket = [[SRWebSocket alloc] initWithURLRequest:urlRequest];
@@ -231,6 +299,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 {
     NSLog(@"Websocket Connected");
     [self.rightButton setEnabled:YES];
+    [self sendReadMessagesSignal];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
@@ -253,6 +322,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     newMessage.time = [msg valueForKey:@"time"];
     newMessage.type = [msg valueForKey:@"type"];
     newMessage.sender = [msg valueForKey:@"sender"];
+    newMessage.avatar = [msg valueForKey:@"avatar"];
 
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.messages.count inSection:0];
 
@@ -287,9 +357,9 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [self sendReadMessagesSignal];
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         if (self.delegate != nil) {
-            NSLog(@"view should call delegate method");
             [self.delegate didGoBackToGroupViewControllerFrom:self];
         }
     }
@@ -342,7 +412,10 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     
     NSError *error;
     NSDictionary *message = @{@"content": [self.textView.text copy],
+                              @"type": @"Text",
+                              @"avatar": self.currentUser[@"avatar"],
                               @"groupId": self.group.groupId};
+    
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:message options:kNilOptions error:&error];
     NSString *msgString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     [_webSocket send:msgString];
@@ -402,22 +475,38 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 #pragma mark - SLKTextViewController Autocompletion
 
-/*
+
 // Uncomment these methods to enable autocompletion mode
 - (BOOL)canShowAutoCompletion
 {
     // Asks of the autocompletion view should be shown
- 
-    return NO;
+    NSArray *array = nil;
+    NSString *prefix = self.foundPrefix;
+    NSString *word = self.foundWord;
+    
+    self.searchResult = nil;
+    
+    if ([prefix isEqualToString:@":"] && word.length > 1) {
+        array = [self.emojis filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self BEGINSWITH[c] %@", word]];
+    }
+    
+    if (array.count > 0) {
+        array = [array sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    }
+    
+    self.searchResult = [[NSMutableArray alloc] initWithArray:array];
+    
+    return self.searchResult.count > 0;
 }
 
 - (CGFloat)heightForAutoCompletionView
 {
     // Asks for the height of the autocompletion view
  
-    return 0.0;
+    CGFloat cellHeight = [self.autoCompletionView.delegate tableView:self.autoCompletionView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    return cellHeight*self.searchResult.count;
 }
-*/
+
 
 
 #pragma mark - <UITableViewDataSource>
@@ -434,7 +523,9 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     if ([tableView isEqual:self.tableView]) {
         return self.messages.count;
     }
-    return 1;
+    else {
+        return self.searchResult.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -469,6 +560,10 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     
     cell.titleLabel.text = message.sender;
     cell.bodyLabel.text = message.content;
+    
+    [cell.thumbnailView sd_setImageWithURL:[NSURL URLWithString:message.avatar]];
+    cell.thumbnailView.layer.shouldRasterize = YES;
+    cell.thumbnailView.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
     cell.indexPath = indexPath;
     cell.usedForMessage = YES;
@@ -534,16 +629,15 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     MessagesTableViewCell *cell = (MessagesTableViewCell *)[self.autoCompletionView dequeueReusableCellWithIdentifier:AutoCompletionCellIdentifier];
     cell.indexPath = indexPath;
     
-//    NSString *item = self.searchResult[indexPath.row];
-//    
-//    if ([self.foundPrefix isEqualToString:@"#"]) {
-//        item = [NSString stringWithFormat:@"# %@", item];
-//    }
-//    else if ([self.foundPrefix isEqualToString:@":"]) {
-//        item = [NSString stringWithFormat:@":%@:", item];
-//    }
+    NSString *item = self.searchResult[indexPath.row];
+    FAKFontAwesome *faIcon = [self formatIconsWithCode:item];
+    [faIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor]];
+
+    UIImage *iconImage = [faIcon imageWithSize:CGSizeMake(11, 11)];
     
-    cell.titleLabel.text = @"dibsy";
+    cell.titleLabel.text = item;
+    cell.thumbnailView.image = iconImage;
+    cell.thumbnailView.backgroundColor = [UIColor whiteColor];
     cell.titleLabel.font = [UIFont systemFontOfSize:14.0];
     cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     
@@ -592,20 +686,42 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 #pragma mark - <UITableViewDelegate>
 
-/*
+
 // Uncomment this method to handle the cell selection
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([tableView isEqual:self.tableView]) {
-
-    }
     if ([tableView isEqual:self.autoCompletionView]) {
-
-        [self acceptAutoCompletionWithString:<#@"any_string"#>];
+        NSString* hubot = @"hubot ";
+        NSMutableString *item = [self.searchResult[indexPath.row] mutableCopy];
+        
+//        if ([self.foundPrefix isEqualToString:@"@"] && self.foundPrefixRange.location == 0) {
+//            [item appendString:@":"];
+//        }
+//        else if ([self.foundPrefix isEqualToString:@":"]) {
+//            [item appendString:@":"];
+//        }
+        
+        [item appendString:@" "];
+        NSString* result = [hubot stringByAppendingString:item];
+        
+        [self acceptAutoCompletionWithString:result keepPrefix:NO];
     }
 }
-*/
 
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"MessageToDetailsSegue"]) {
+        GroupDetailsTableViewController *destinationViewController = segue.destinationViewController;
+        destinationViewController.delegate = self;
+        destinationViewController.group = self.group;
+    }
+}
+
+- (void)didUpdateGroupName:(NSString *)groupName
+{
+    self.title = groupName;
+}
 
 #pragma mark - View lifeterm
 

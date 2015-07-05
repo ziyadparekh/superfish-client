@@ -12,4 +12,6 @@
 
 - (void) loadUserContacts:(void (^)(NSArray *contacts))success failure:(void (^)(RKObjectRequestOperation *operation, NSError *error))failure;
 
+- (void) postUserContacts:(NSMutableDictionary *)contacts withBlock:(void (^)(NSArray *array))success failure:(void (^) (RKObjectRequestOperation *operation, NSError *error))failure;
+
 @end

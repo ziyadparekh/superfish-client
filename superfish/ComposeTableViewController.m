@@ -18,9 +18,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 @interface ComposeTableViewController ()
 {
-    NSMutableArray *users;
-    NSMutableArray *sections;
-    NSMutableArray *selection;
+
 }
 
 @property (strong, nonatomic) IBOutlet UIView *viewHeader;
@@ -46,8 +44,8 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     self.tableView.tableHeaderView = viewHeader;
     self.tableView.tableFooterView = [[UIView alloc] init];
     
-    users = [[NSMutableArray alloc] init];
-    selection = [[NSMutableArray alloc] init];
+    self.users = [[NSMutableArray alloc] init];
+    self.selection = [[NSMutableArray alloc] init];
     
     //[self configureRestkit];
     [self loadPeople];
@@ -101,11 +99,11 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 - (void)loadPeople
 {
     [[ContactsManager sharedManager] loadUserContacts:^(NSArray *contacts) {
-        [users removeAllObjects];
+        [self.users removeAllObjects];
         for (Contacts *contact in contacts) {
-            [users addObject:contact];
+            [self.users addObject:contact];
         }
-        [self setObjects:users];
+        [self setObjects:self.users];
         [self.tableView reloadData];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"There was an error %@", error);
@@ -114,15 +112,15 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 - (void)setObjects:(NSArray *)objects
 {
-    if (sections != nil) {
-        [sections removeAllObjects];
+    if (self.sections != nil) {
+        [self.sections removeAllObjects];
     }
     
     NSInteger sectionTitlesCount = [[[UILocalizedIndexedCollation currentCollation] sectionTitles] count];
-    sections = [[NSMutableArray alloc] initWithCapacity:sectionTitlesCount];
+    self.sections = [[NSMutableArray alloc] initWithCapacity:sectionTitlesCount];
     
     for (NSUInteger i=0; i<sectionTitlesCount; i++) {
-        [sections addObject:[NSMutableArray array]];
+        [self.sections addObject:[NSMutableArray array]];
     }
     NSArray *sorted = [objects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
                        {
@@ -134,7 +132,7 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     for (Contacts *object in sorted)
     {
         NSInteger section = [[UILocalizedIndexedCollation currentCollation] sectionForObject:object collationStringSelector:@selector(getUsername)];
-        [sections[section] addObject:object];
+        [self.sections[section] addObject:object];
     }
 }
 
@@ -156,13 +154,14 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 - (IBAction)didPressDoneButton:(UIBarButtonItem *)sender
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-    if ([selection count] == 0) { NSLog(@"need to select users"); return; }
+    if ([self.selection count] == 0) { NSLog(@"need to select users"); return; }
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *currentUser = [userDefaults objectForKey:@"currentUser"];
 
-    NSMutableDictionary *group = [[NSMutableDictionary alloc] initWithObjects:@[@"", selection, TeporaryUserToken] forKeys:@[@"name", @"members", @"token"]];
+    NSMutableDictionary *group = [[NSMutableDictionary alloc] initWithObjects:@[@"", self.selection, currentUser[@"token"]] forKeys:@[@"name", @"members", @"token"]];
     [[NewGroupManager sharedManager] createNewGroup:group withBlock:^(NSArray *array) {
-        NSLog(@"%@", self.delegate);
         if (self.delegate != nil){
-            NSLog(@"herere");
             [self.delegate didCreateGroup:array forController:self];
         }
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -175,17 +174,17 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return [sections count];
+    return [self.sections count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [sections[section] count];
+    return [self.sections[section] count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if ([sections[section] count] != 0)
+    if ([self.sections[section] count] != 0)
     {
         return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
     }
@@ -213,11 +212,11 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     if (cell == nil) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     
-    NSMutableArray *userstemp = sections[indexPath.section];
+    NSMutableArray *userstemp = self.sections[indexPath.section];
     Contacts *user = userstemp[indexPath.row];
     cell.textLabel.text = user.username;
     
-    BOOL selected = [selection containsObject:user.username];
+    BOOL selected = [self.selection containsObject:user.username];
     cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     
     return cell;
@@ -231,10 +230,10 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    NSMutableArray *userstemp = sections[indexPath.section];
+    NSMutableArray *userstemp = self.sections[indexPath.section];
     Contacts *user = userstemp[indexPath.row];
-    BOOL selected = [selection containsObject:user.username];
-    if (selected) [selection removeObject:user.username]; else [selection addObject:user.username];
+    BOOL selected = [self.selection containsObject:user.username];
+    if (selected) [self.selection removeObject:user.username]; else [self.selection addObject:user.username];
     //---------------------------------------------------------------------------------------------------------------------------------------------
     [self.tableView reloadData];
 }

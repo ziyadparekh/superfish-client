@@ -11,7 +11,7 @@
 #import "MappingProvider.h"
 #import "ZPGroup.h"
 
-static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3c494181d910d3c7dc7cbe76e0ad6e1ebba80d404740c4cd7";
+static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb45e77f9153bf8d4959facacd2db395fb67cbf3a1d5fd6ddc";
 
 static GroupManager *sharedManager = nil;
 
@@ -28,17 +28,21 @@ static GroupManager *sharedManager = nil;
 
 - (void)loadUserGroups:(void (^)(NSArray *))success failure:(void (^)(RKObjectRequestOperation *, NSError *))failure
 {
-    NSDictionary *queryParams = @{@"token" : TeporaryUserToken};
-    [self getObjectsAtPath:@"/groups" parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        if (success) {
-            NSArray *groups = [[NSArray alloc] initWithArray:mappingResult.array];
-            success(groups);
-        }
-    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-        if (failure) {
-            failure(operation, error);
-        }
-    }];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *currentUser = [userDefaults objectForKey:@"currentUser"];
+    if (currentUser != nil) {
+        NSDictionary *queryParams = @{@"token" : currentUser[@"token"]};
+        [self getObjectsAtPath:@"/groups" parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            if (success) {
+                NSArray *groups = [[NSArray alloc] initWithArray:mappingResult.array];
+                success(groups);
+            }
+        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+            if (failure) {
+                failure(operation, error);
+            }
+        }];
+    }
 }
 
 #pragma mark - Setup Helpers

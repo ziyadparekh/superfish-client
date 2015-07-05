@@ -24,6 +24,6 @@
 @property (nonatomic, readonly) BOOL needsPlaceholder;
 @property (nonatomic) BOOL usedForMessage;
 
-- (void)attributedLabel:(NIAttributedLabel *)attributedLabel didSelectTextCheckingResult:(NSTextCheckingResult *)result atPoint:(CGPoint)point;
+//- (void)attributedLabel:(NIAttributedLabel *)attributedLabel didSelectTextCheckingResult:(NSTextCheckingResult *)result atPoint:(CGPoint)point;
 
 @end

@@ -14,6 +14,10 @@
 #import "ComposeTableViewController.h"
 #import "MessagesViewController.h"
 
+#import <FontAwesomeKit/FontAwesomeKit.h>
+
+#import "Common.h"
+
 #import "GroupManager.h"
 
 #import <RestKit/RestKit.h>
@@ -21,7 +25,9 @@
 
 
 static NSString *GroupCellIdentifier = @"GroupCell";
-static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3c494181d910d3c7dc7cbe76e0ad6e1ebba80d404740c4cd7";
+
+static NSString *TemporaryUserId = @"ziyadparekh";
+static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb45e77f9153bf8d4959facacd2db395fb67cbf3a1d5fd6ddc";
 
 @interface GroupsTableViewController ()
 
@@ -41,13 +47,29 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    FAKFontAwesome *icon = [FAKFontAwesome userIconWithSize:25];
+    [icon addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor]];
+    
+    [self.navigationItem.leftBarButtonItem setImage:[icon imageWithSize:CGSizeMake(25, 25)]];
+    
     [self.tableView registerClass:[GroupsTableViewCell class] forCellReuseIdentifier:GroupCellIdentifier];
     self.tableView.rowHeight = 72.0;
     [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 30, 0, 0)];
+    self.title = @"Conversations";
     
-    // Configure Restkit
-    //[self configureRestkit];
-    [self loadGroups];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.currentUser = [userDefaults objectForKey:@"currentUser"];
+    if (self.currentUser == nil) {
+        [self performSegueWithIdentifier:@"GroupToHomeSegue" sender:self];
+    } else {
+        [self loadGroups];
+    }
 }
 
 - (void) configureRestkit {
@@ -81,14 +103,6 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"There was an error : %@", error);
     }];
-    
-//    NSDictionary *queryParams = @{@"token" : TeporaryUserToken};
-//    [[RKObjectManager sharedManager] getObjectsAtPath:@"/groups" parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-//        self.groups = mappingResult.array;
-//        [self.tableView reloadData];
-//    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-//        NSLog(@"There was an error : %@", error);
-//    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -117,8 +131,20 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
     cell.groupNameLabel.text = [self getGroupName:group];
     cell.lastMessageTextLabel.text = [group getLastMessageForGroup:group];
     cell.lastMessageSentDateLabel.text = [group getGroupActivity:group];
-    
+    if (![self hasUserReadLastMessage:[group getReadArrayForGroup:group]]) {
+        cell.lastMessageTextLabel.textColor = [UIColor colorWithRed:32.0/255 green:206.0/255 blue:153.0/255 alpha:1.0];
+    } else {
+        cell.lastMessageTextLabel.textColor = [UIColor lightGrayColor];
+    }
     return cell;
+}
+
+- (BOOL)hasUserReadLastMessage:(NSArray *)array
+{
+    if ([array containsObject:self.currentUser[@"username"]]) {
+        return YES;
+    }
+    return NO;
 }
 
 - (NSString *)getGroupName:(ZPGroup *)group
@@ -127,9 +153,11 @@ static NSString *TeporaryUserToken = @"557f9a2c3c5d63a12d000001_2fcea5359356eed3
         return @"Botler";
     }
     if (group.name.length == 0) {
-        NSMutableArray *usernames = [[NSMutableArray alloc] initWithCapacity:[group.members count]];
+        NSMutableArray *usernames = [[NSMutableArray alloc] initWithCapacity:(group.members.count -1)];
         for (NSDictionary *user in group.members) {
-            [usernames addObject:user[@"username"]];
+            if (![user[@"username"] isEqualToString:self.currentUser[@"username"]]) {
+                [usernames addObject:user[@"username"]];
+            }
         }
         return [usernames componentsJoinedByString:@", "];
     }

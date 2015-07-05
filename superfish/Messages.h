@@ -14,8 +14,10 @@
 @property (strong, nonatomic) NSString *content;
 @property (strong, nonatomic) NSString *time;
 @property (strong, nonatomic) NSString *sender;
+@property (strong, nonatomic) NSString *avatar;
 @property (strong, nonatomic) NSString *type;
 @property (strong, nonatomic) NSString *group;
+@property (strong, nonatomic) NSArray *read;
 @property (nonatomic) BOOL attachment;
 
 @end

@@ -20,4 +20,9 @@
 
 @property (nonatomic, assign) IBOutlet id<AddressBookDelegate>delegate;
 
+- (IBAction)didPressCancelButton:(UIBarButtonItem *)sender;
+
+- (IBAction)didPressRefreshButton:(UIBarButtonItem *)sender;
+
+
 @end

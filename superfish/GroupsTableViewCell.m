@@ -29,17 +29,17 @@ CGFloat chatTableViewCellInsetLeft = 30.0;
     if (self) {
         self.groupNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.groupNameLabel.backgroundColor = [UIColor whiteColor];
-        self.groupNameLabel.font = [UIFont boldSystemFontOfSize:17];
+        self.groupNameLabel.font = [UIFont fontWithName:@"Zapf Dingbats" size:18.0];
         
         self.lastMessageSentDateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.lastMessageSentDateLabel.backgroundColor = [UIColor whiteColor];
-        self.lastMessageSentDateLabel.font = [UIFont systemFontOfSize:15];
+        self.lastMessageSentDateLabel.font = [UIFont fontWithName:@"Zapf Dingbats" size:15.0];
         self.lastMessageSentDateLabel.textColor = [UIColor lightGrayColor];
         self.lastMessageSentDateLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         
         self.lastMessageTextLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.lastMessageTextLabel.backgroundColor = [UIColor whiteColor];
-        self.lastMessageTextLabel.font = [UIFont systemFontOfSize:15];
+        self.lastMessageTextLabel.font = [UIFont fontWithName:@"Zapf Dingbats" size:15.0];
         self.lastMessageTextLabel.numberOfLines = 2;
         self.lastMessageTextLabel.textColor = self.lastMessageSentDateLabel.textColor;
         

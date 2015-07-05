@@ -28,7 +28,10 @@ static ContactsManager *sharedManager = nil;
 
 - (void)loadUserContacts:(void (^)(NSArray *))success failure:(void (^)(RKObjectRequestOperation *, NSError *))failure
 {
-    NSDictionary *queryParams = @{@"token" : TeporaryUserToken};
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *currentUser = [userDefaults objectForKey:@"currentUser"];
+    NSDictionary *queryParams = @{@"token" : currentUser[@"token"]};
+    
     [self getObjectsAtPath:@"/contacts" parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         if (success) {
             NSArray *contacts = [[NSArray alloc] initWithArray:mappingResult.array];
@@ -41,13 +44,41 @@ static ContactsManager *sharedManager = nil;
     }];
 }
 
+- (void)postUserContacts:(NSMutableDictionary *)contacts withBlock:(void (^)(NSArray *))success failure:(void (^)(RKObjectRequestOperation *, NSError *))failure
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *currentUser = [userDefaults objectForKey:@"currentUser"];
+    NSDictionary *queryParams = @{@"token" : currentUser[@"token"]};
+    //NSDictionary *queryParams = @{@"token" : TeporaryUserToken};
+    
+    [self postObject:contacts path:@"/contacts" parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        if (success) {
+            success(mappingResult.array);
+        }
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        if (failure) {
+            failure(operation, error);
+        }
+    }];
+}
+
 #pragma mark - Setup Helpers
 
-- (void) setupResponseDescriptors {
+- (void)setupRequestDescriptors
+{
+    [super setupRequestDescriptors];
+    RKObjectMapping *contactsMapping = [MappingProvider postContactsMapping];
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:contactsMapping objectClass:[NSMutableDictionary class] rootKeyPath:nil method:RKRequestMethodPOST];
+    
+    [self addRequestDescriptor:requestDescriptor];
+    
+}
+
+- (void)setupResponseDescriptors {
     [super setupResponseDescriptors];
     RKObjectMapping *contactsMapping = [MappingProvider contactMapping];
     // register mappings with the provider using a response descriptor
-    RKResponseDescriptor *fetchContactsResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:contactsMapping method:RKRequestMethodGET pathPattern:@"/contacts" keyPath:@"response.contacts" statusCodes:[NSIndexSet indexSetWithIndex:200]];
+    RKResponseDescriptor *fetchContactsResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:contactsMapping method:RKRequestMethodAny pathPattern:@"/contacts" keyPath:@"response" statusCodes:[NSIndexSet indexSetWithIndex:200]];
     
     [self addResponseDescriptor:fetchContactsResponseDescriptor];
 }

@@ -17,6 +17,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:32.0/255 green:206.0/255 blue:153.0/255 alpha:1.0]];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIFont fontWithName:@"Zapf Dingbats" size:21], NSFontAttributeName, nil]];
     return YES;
 }
 

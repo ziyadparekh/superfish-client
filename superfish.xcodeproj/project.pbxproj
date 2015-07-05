@@ -8,6 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		796C3B2CCC6E8649D2BD9DA2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA14FDB5A0712DD3E3B8CB8 /* libPods.a */; };
+		871FB3CF1B3F138C00AEFE09 /* GroupDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB3CE1B3F138C00AEFE09 /* GroupDetailsTableViewController.m */; };
+		871FB3D21B3FB10B00AEFE09 /* GroupNameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB3D11B3FB10B00AEFE09 /* GroupNameManager.m */; };
+		871FB3D61B40A18700AEFE09 /* EditGroupMembersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB3D51B40A18700AEFE09 /* EditGroupMembersTableViewController.m */; };
+		871FB3DC1B40C88300AEFE09 /* GroupMembersManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB3DB1B40C88300AEFE09 /* GroupMembersManager.m */; };
+		871FB3E51B472E9100AEFE09 /* RegisterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB3E41B472E9100AEFE09 /* RegisterTableViewController.m */; };
+		871FB3E81B472F6500AEFE09 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB3E71B472F6500AEFE09 /* User.m */; };
+		871FB3EB1B47300D00AEFE09 /* NewUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB3EA1B47300D00AEFE09 /* NewUserManager.m */; };
+		871FB3F41B473FC900AEFE09 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB3F21B473FC900AEFE09 /* Common.m */; };
+		871FB3FB1B4749DB00AEFE09 /* LoginTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB3FA1B4749DB00AEFE09 /* LoginTableViewController.m */; };
+		871FB3FE1B4751BB00AEFE09 /* LoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB3FD1B4751BB00AEFE09 /* LoginManager.m */; };
+		871FB4011B475D4000AEFE09 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB4001B475D4000AEFE09 /* HomeViewController.m */; };
+		871FB4041B48B30600AEFE09 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FB4031B48B30600AEFE09 /* Helpers.m */; };
+		871FB4061B48B70900AEFE09 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871FB4051B48B70900AEFE09 /* CoreText.framework */; };
+		871FB4081B48B71000AEFE09 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871FB4071B48B71000AEFE09 /* CoreGraphics.framework */; };
 		871FC3D11B1F7E01003F9919 /* ZPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D01B1F7E01003F9919 /* ZPTableViewController.m */; };
 		871FC3D41B1F7EB3003F9919 /* ZPGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D31B1F7EB3003F9919 /* ZPGroup.m */; };
 		871FC3D71B1F87A1003F9919 /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 871FC3D61B1F87A1003F9919 /* Messages.m */; };
@@ -51,6 +65,32 @@
 		1FA14FDB5A0712DD3E3B8CB8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		294ED66FD3E4E9283780773E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7F3DB5247631E3E37EA86F11 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		871FB3CD1B3F138C00AEFE09 /* GroupDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupDetailsTableViewController.h; sourceTree = "<group>"; };
+		871FB3CE1B3F138C00AEFE09 /* GroupDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupDetailsTableViewController.m; sourceTree = "<group>"; };
+		871FB3D01B3FB10B00AEFE09 /* GroupNameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupNameManager.h; sourceTree = "<group>"; };
+		871FB3D11B3FB10B00AEFE09 /* GroupNameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupNameManager.m; sourceTree = "<group>"; };
+		871FB3D41B40A18700AEFE09 /* EditGroupMembersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditGroupMembersTableViewController.h; sourceTree = "<group>"; };
+		871FB3D51B40A18700AEFE09 /* EditGroupMembersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditGroupMembersTableViewController.m; sourceTree = "<group>"; };
+		871FB3DA1B40C88300AEFE09 /* GroupMembersManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupMembersManager.h; sourceTree = "<group>"; };
+		871FB3DB1B40C88300AEFE09 /* GroupMembersManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupMembersManager.m; sourceTree = "<group>"; };
+		871FB3E31B472E9100AEFE09 /* RegisterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterTableViewController.h; sourceTree = "<group>"; };
+		871FB3E41B472E9100AEFE09 /* RegisterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterTableViewController.m; sourceTree = "<group>"; };
+		871FB3E61B472F6500AEFE09 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		871FB3E71B472F6500AEFE09 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		871FB3E91B47300D00AEFE09 /* NewUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserManager.h; sourceTree = "<group>"; };
+		871FB3EA1B47300D00AEFE09 /* NewUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserManager.m; sourceTree = "<group>"; };
+		871FB3F21B473FC900AEFE09 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		871FB3F61B473FE500AEFE09 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		871FB3F91B4749DB00AEFE09 /* LoginTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTableViewController.h; sourceTree = "<group>"; };
+		871FB3FA1B4749DB00AEFE09 /* LoginTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableViewController.m; sourceTree = "<group>"; };
+		871FB3FC1B4751BB00AEFE09 /* LoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginManager.h; sourceTree = "<group>"; };
+		871FB3FD1B4751BB00AEFE09 /* LoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginManager.m; sourceTree = "<group>"; };
+		871FB3FF1B475D4000AEFE09 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		871FB4001B475D4000AEFE09 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		871FB4021B48B30600AEFE09 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
+		871FB4031B48B30600AEFE09 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
+		871FB4051B48B70900AEFE09 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		871FB4071B48B71000AEFE09 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		871FC3CF1B1F7E01003F9919 /* ZPTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPTableViewController.h; sourceTree = "<group>"; };
 		871FC3D01B1F7E01003F9919 /* ZPTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPTableViewController.m; sourceTree = "<group>"; };
 		871FC3D21B1F7EB3003F9919 /* ZPGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPGroup.h; sourceTree = "<group>"; };
@@ -112,6 +152,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				871FB4081B48B71000AEFE09 /* CoreGraphics.framework in Frameworks */,
+				871FB4061B48B70900AEFE09 /* CoreText.framework in Frameworks */,
 				796C3B2CCC6E8649D2BD9DA2 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,9 +180,56 @@
 		66D97280076E8B9FD0798496 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				871FB4071B48B71000AEFE09 /* CoreGraphics.framework */,
+				871FB4051B48B70900AEFE09 /* CoreText.framework */,
 				1FA14FDB5A0712DD3E3B8CB8 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		871FB3CC1B3F11EE00AEFE09 /* GroupDetails */ = {
+			isa = PBXGroup;
+			children = (
+				871FB3D31B40A15F00AEFE09 /* EditGroupMembers */,
+				871FB3CD1B3F138C00AEFE09 /* GroupDetailsTableViewController.h */,
+				871FB3CE1B3F138C00AEFE09 /* GroupDetailsTableViewController.m */,
+			);
+			name = GroupDetails;
+			sourceTree = "<group>";
+		};
+		871FB3D31B40A15F00AEFE09 /* EditGroupMembers */ = {
+			isa = PBXGroup;
+			children = (
+				871FB3D41B40A18700AEFE09 /* EditGroupMembersTableViewController.h */,
+				871FB3D51B40A18700AEFE09 /* EditGroupMembersTableViewController.m */,
+			);
+			name = EditGroupMembers;
+			sourceTree = "<group>";
+		};
+		871FB3DD1B472BBA00AEFE09 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				871FB3E31B472E9100AEFE09 /* RegisterTableViewController.h */,
+				871FB3E41B472E9100AEFE09 /* RegisterTableViewController.m */,
+				871FB3E61B472F6500AEFE09 /* User.h */,
+				871FB3E71B472F6500AEFE09 /* User.m */,
+				871FB3F91B4749DB00AEFE09 /* LoginTableViewController.h */,
+				871FB3FA1B4749DB00AEFE09 /* LoginTableViewController.m */,
+				871FB3FF1B475D4000AEFE09 /* HomeViewController.h */,
+				871FB4001B475D4000AEFE09 /* HomeViewController.m */,
+			);
+			name = Welcome;
+			sourceTree = "<group>";
+		};
+		871FB3EC1B473E3100AEFE09 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				871FB3F21B473FC900AEFE09 /* Common.m */,
+				871FB3F61B473FE500AEFE09 /* Common.h */,
+				871FB4021B48B30600AEFE09 /* Helpers.h */,
+				871FB4031B48B30600AEFE09 /* Helpers.m */,
+			);
+			name = General;
 			sourceTree = "<group>";
 		};
 		8722650B1B1CD24200341003 = {
@@ -166,6 +255,9 @@
 		872265161B1CD24300341003 /* superfish */ = {
 			isa = PBXGroup;
 			children = (
+				871FB3EC1B473E3100AEFE09 /* General */,
+				871FB3DD1B472BBA00AEFE09 /* Welcome */,
+				871FB3CC1B3F11EE00AEFE09 /* GroupDetails */,
 				87D0FFBD1B3118CF0028E284 /* Api */,
 				87D0FFA41B2CB2760028E284 /* Contacts */,
 				879C83BE1B238BB800818ECF /* NIAttributedLabel */,
@@ -289,6 +381,14 @@
 				87284ED71B331C8700173054 /* NewGroupManager.m */,
 				87284ED91B346A8A00173054 /* MessagesManager.h */,
 				87284EDA1B346A8A00173054 /* MessagesManager.m */,
+				871FB3D01B3FB10B00AEFE09 /* GroupNameManager.h */,
+				871FB3D11B3FB10B00AEFE09 /* GroupNameManager.m */,
+				871FB3DA1B40C88300AEFE09 /* GroupMembersManager.h */,
+				871FB3DB1B40C88300AEFE09 /* GroupMembersManager.m */,
+				871FB3E91B47300D00AEFE09 /* NewUserManager.h */,
+				871FB3EA1B47300D00AEFE09 /* NewUserManager.m */,
+				871FB3FC1B4751BB00AEFE09 /* LoginManager.h */,
+				871FB3FD1B4751BB00AEFE09 /* LoginManager.m */,
 			);
 			name = Api;
 			sourceTree = "<group>";
@@ -430,25 +530,37 @@
 			files = (
 				879C83B51B22543400818ECF /* MessagePost.m in Sources */,
 				8722651D1B1CD24300341003 /* AppDelegate.m in Sources */,
+				871FB3CF1B3F138C00AEFE09 /* GroupDetailsTableViewController.m in Sources */,
 				87D0FFC01B311CD40028E284 /* ComposeTableViewController.m in Sources */,
 				87D0FFC31B311ED30028E284 /* MappingProvider.m in Sources */,
 				87D0FFA71B2CB7D10028E284 /* ContactsTableViewController.m in Sources */,
 				871FC3D71B1F87A1003F9919 /* Messages.m in Sources */,
+				871FB3D61B40A18700AEFE09 /* EditGroupMembersTableViewController.m in Sources */,
 				87D0FFAA1B2CC4F90028E284 /* Contacts.m in Sources */,
 				879C83AC1B20E5E400818ECF /* MessagesViewController.m in Sources */,
+				871FB3D21B3FB10B00AEFE09 /* GroupNameManager.m in Sources */,
 				87D0FFC61B311F7E0028E284 /* ZPObjectManager.m in Sources */,
 				8722651A1B1CD24300341003 /* main.m in Sources */,
+				871FB3FE1B4751BB00AEFE09 /* LoginManager.m in Sources */,
 				87284ED81B331C8700173054 /* NewGroupManager.m in Sources */,
 				87D0FFA31B27E4650028E284 /* GroupsTableViewCell.m in Sources */,
 				879C83BC1B2387F100818ECF /* NIAttributedLabel.m in Sources */,
+				871FB3E51B472E9100AEFE09 /* RegisterTableViewController.m in Sources */,
 				879C83BD1B2387F100818ECF /* NSMutableAttributedString+NimbusKitAttributedLabel.m in Sources */,
 				871FC3D41B1F7EB3003F9919 /* ZPGroup.m in Sources */,
+				871FB3EB1B47300D00AEFE09 /* NewUserManager.m in Sources */,
 				87D0FFA01B27E1A50028E284 /* GroupsTableViewController.m in Sources */,
+				871FB3FB1B4749DB00AEFE09 /* LoginTableViewController.m in Sources */,
 				872265201B1CD24300341003 /* superfish.xcdatamodeld in Sources */,
+				871FB3DC1B40C88300AEFE09 /* GroupMembersManager.m in Sources */,
+				871FB4011B475D4000AEFE09 /* HomeViewController.m in Sources */,
 				879C83AF1B20E65D00818ECF /* MessagesTableViewCell.m in Sources */,
+				871FB3F41B473FC900AEFE09 /* Common.m in Sources */,
 				87284EDB1B346A8A00173054 /* MessagesManager.m in Sources */,
+				871FB3E81B472F6500AEFE09 /* User.m in Sources */,
 				87D0FFCC1B3316900028E284 /* ContactsManager.m in Sources */,
 				87D0FFC91B3120D60028E284 /* GroupManager.m in Sources */,
+				871FB4041B48B30600AEFE09 /* Helpers.m in Sources */,
 				871FC3D11B1F7E01003F9919 /* ZPTableViewController.m in Sources */,
 				879C83B21B20E68000818ECF /* MessagesTextView.m in Sources */,
 			);

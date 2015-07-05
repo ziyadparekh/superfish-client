@@ -18,6 +18,14 @@
     return msg.content;
 }
 
+- (NSArray *)getReadArrayForGroup:(ZPGroup *) group {
+    if ([group.messages count] == 0) {
+        return @[];
+    }
+    Messages *msg = [group.messages objectAtIndex:0];
+    return msg.read;
+}
+
 - (NSString *)getGroupActivity:(ZPGroup *)group {
     NSString *activity = group.activity;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -25,6 +33,26 @@
     NSDate *date = [formatter dateFromString:activity];
     
     return [date formattedAsTimeAgo];
+}
+
+- (NSString *)getGroupName:(ZPGroup *)group
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.currentUser = [userDefaults objectForKey:@"currentUser"];
+    
+    if (group.members.count == 1) {
+        return @"Botler";
+    }
+    if (group.name.length == 0) {
+        NSMutableArray *usernames = [[NSMutableArray alloc] initWithCapacity:(group.members.count -1)];
+        for (NSDictionary *user in group.members) {
+            if (![user[@"username"] isEqualToString:self.currentUser[@"username"]]) {
+                [usernames addObject:user[@"username"]];
+            }
+        }
+        return [usernames componentsJoinedByString:@", "];
+    }
+    return group.name;
 }
 
 @end

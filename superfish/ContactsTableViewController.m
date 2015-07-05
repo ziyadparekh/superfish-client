@@ -11,6 +11,7 @@
 #import <RestKit/RestKit.h>
 
 #import "Contacts.h"
+#import "ContactsManager.h"
 
 static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb45e77f9153bf8d4959facacd2db395fb67cbf3a1d5fd6ddc";
 
@@ -42,8 +43,12 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
     users1 = [[NSMutableArray alloc] init];
     users2 = [[NSMutableArray alloc] init];
     
-    [self configureRestkit];
-    
+    //[self configureRestkit];
+    [self initializeAddressBook];
+}
+
+- (void)initializeAddressBook
+{
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
     ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -133,17 +138,14 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 
 - (void)loadUsers
 {
-    NSDictionary *queryParams = @{@"token": TeporaryUserToken};
-
     NSMutableArray *tmpContacts = [[NSMutableArray alloc] init];
     for (NSDictionary *user in users1) {
         [tmpContacts addObjectsFromArray:user[@"phones"]];
     }
-    NSDictionary *contacts = [[NSDictionary alloc] initWithObjects:@[tmpContacts] forKeys:@[@"contacts"]];
-    
-    [[RKObjectManager sharedManager] postObject:contacts path:@"/contacts" parameters:queryParams success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    NSMutableDictionary *contacts = [[NSMutableDictionary alloc] initWithObjects:@[tmpContacts] forKeys:@[@"contacts"]];
+    [[ContactsManager sharedManager] postUserContacts:contacts withBlock:^(NSArray *array) {
         [users2 removeAllObjects];
-        for (Contacts *contact in mappingResult.array) {
+        for (Contacts *contact in array) {
             [users2 addObject:contact];
             [self removeUser:contact.number];
         }
@@ -235,12 +237,12 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    if (indexPath.section == 0)
-    {
-        [self dismissViewControllerAnimated:YES completion:^{
-            if (delegate != nil) [delegate didSelectAddressBookUser:users2[indexPath.row]];
-        }];
-    }
+//    if (indexPath.section == 0)
+//    {
+//        [self dismissViewControllerAnimated:YES completion:^{
+//            if (delegate != nil) [delegate didSelectAddressBookUser:users2[indexPath.row]];
+//        }];
+//    }
     if (indexPath.section == 1)
     {
         indexSelected = indexPath;
@@ -337,4 +339,13 @@ static NSString *TeporaryUserToken = @"557fa14f3c5d63a5cc000001_a34fecc9a98c34eb
 }
 */
 
+- (IBAction)didPressCancelButton:(UIBarButtonItem *)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)didPressRefreshButton:(UIBarButtonItem *)sender {
+    
+    [self initializeAddressBook];
+}
 @end
